@@ -1,0 +1,11 @@
+	<div class="container">
+	<div class="row">
+
+	<!-- ko foreach: apps -->
+		<div class="col-md-4 app" data-bind="text:name"></div>
+		<!-- ko if: ($index()+1)%3 == 0 -->
+		
+		<!-- /ko -->
+	<!-- /ko -->
+</div >
+</div>
