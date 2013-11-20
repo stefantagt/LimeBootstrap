@@ -18,10 +18,16 @@ lbs.apploader.register('lappstore', function () {
 
             
 
-           
-            $.getJSON("http://limebootstrap-appstore.herokuapp.com", function(data) { 
-                    me.appData = data
-                });
+            $.ajax({
+              dataType: "json",
+              url: "http://limebootstrap-appstore.herokuapp.com",
+              async:false,
+              success: function(result){
+                    me.appData = result
+                    alert(result);
+
+              }
+            });
           
 
             return me.appData;
