@@ -9,7 +9,7 @@ ko.bindingProvider.instance = {
         var bindings;
         try {
             bindings = ko.defaultBindingProvider.getBindings(node, bindingContext);
-            
+
             //check validity
             this.checkValue(bindings, 'text', node);
             this.checkValue(bindings, 'value', node);
@@ -53,7 +53,7 @@ ko.bindingProvider.instance = {
         return bindings;
     },
 
-   
+
     //set visible bindings to the binding values. Used if bindings failed to display helper data.
     getDummyBindings: function (node) {
         var bindings = {};
@@ -61,7 +61,7 @@ ko.bindingProvider.instance = {
         //set text
         var match = new RegExp("text\:[^\,\}]*").exec($(node).attr('data-bind'))
         if (match) {bindings['text'] = 'Binding: ' + match[0].split(":")[1].trim()}
-           
+
         //set value
         var match = new RegExp("value\:[^\,\}]*").exec($(node).attr('data-bind'))
         if (match) { bindings['value'] = 'Binding: ' + match[0].split(":")[1].trim() }
@@ -89,7 +89,7 @@ ko.bindingHandlers.textWithIcon = {
 };
 
 /**
-LimeLink    
+LimeLink
 */
 ko.bindingHandlers.limeLink = {
     init: function (element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
@@ -103,7 +103,7 @@ ko.bindingHandlers.limeLink = {
 };
 
 /**
-VBA call  
+VBA call
 */
 ko.bindingHandlers.vba = {
     init: function (element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
@@ -117,7 +117,7 @@ ko.bindingHandlers.vba = {
 };
 
 /**
-Show on google map  
+Show on google map
 */
 ko.bindingHandlers.showOnMap = {
     init: function (element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
@@ -163,7 +163,7 @@ Invoke old-style app
 */
 ko.bindingHandlers.appInvoke = {
     init: function (element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
-        
+
         var newValueAccessor = function() {
             if(lbs.hasLimeConnection == true){
                 return function() {
@@ -180,7 +180,7 @@ ko.bindingHandlers.appInvoke = {
 };
 
 /**
-Call VBA function to check if item should be visible 
+Call VBA function to check if item should be visible
 */
 ko.bindingHandlers.vbaVisible = {
     init: function (element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
@@ -246,6 +246,21 @@ ko.bindingHandlers.safeText = {
     text = value ? (options.property ? value[property] : value) : fallback;
 
     ko.bindingHandlers.text.update(element, function() { return text; });
+    }
+};
+
+ko.bindingHandlers.expandableMenu = {
+    update: function(element. valueAccessor) {
+        var menu = $(element);
+        var menuItems = menu.children('li:not(.menu-header):not(.divider)');
+        if (valueAccessor()()) {
+            menu.children('.menu-header').addClass('fa-angle-down').removeClass('fa-angle-right');
+            menuItems.show();
+        } else {
+            menu.children('.menu-header').addClass('fa-angle-right').removeClass('fa-angle-down');
+            menuItems.hide();
+        }
+        $.cookie(element.expandableMenu.cookieHash, valueAccessor()(), { expires: 9999 });
     }
 };
 

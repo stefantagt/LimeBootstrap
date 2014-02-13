@@ -54,18 +54,25 @@ Added CSS for menu**
     padding-right: 0;
     padding-top: 10px;
 }
- 
+
 .menu .menu-header {
     margin-left: -5px;
     margin-right: -5px;
     text-shadow: 0 1px 0 rgba(255, 255, 255, .5);
 }
 
+.menu.expandable > .menu-header:before {
+    display: inline-block;
+    font-family: FontAwesome;
+    text-align: center;
+    width: 1.2857142857142858em;
+}
+
 .menu [class^="icon-"],
 .menu [class*=" icon-"] {
     margin-right: 2px;
 }
- 
+
 .menu .divider {
     background-color: #D2E4FF;
     height: 1px;
@@ -125,7 +132,7 @@ BUTTONS**
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    width: 100%; 
+    width: 100%;
 }
 .btn-group>.btn-lime,
 .btn-lime-split>.btn{
@@ -457,15 +464,15 @@ SKIN
     color:#645082;
 }
 .britney #wrapper .content-container .menu li{
-    color:#645082 ; 
+    color:#645082 ;
 }
 
 .britney #wrapper .content-container .menu .divider{
-    background-color:#E3CEFC ; 
+    background-color:#E3CEFC ;
 }
 
 .britney #wrapper .content-container .menu li:not(.menu-header):not(.divider):hover{
-    background-color:#E3CEFC ; 
+    background-color:#E3CEFC ;
 }
 
 .britney .header-container:before{
@@ -482,15 +489,15 @@ SKIN
     color:#545B68;
 }
 .silver #wrapper .content-container .menu li{
-    color:#545B68 ; 
+    color:#545B68 ;
 }
 
 .silver #wrapper .content-container .menu .divider{
-    background-color:#D8D8D8 ; 
+    background-color:#D8D8D8 ;
 }
 
 .silver #wrapper .content-container .menu li:not(.menu-header):not(.divider):hover{
-    background-color:#D8D8D8 ; 
+    background-color:#D8D8D8 ;
 }
 
 .silver .header-container:before{
@@ -536,7 +543,7 @@ Debug
 }
 
 #console li  {
-    background-color:#000;  
+    background-color:#000;
 }
 
 #console p  {
@@ -595,7 +602,7 @@ INFO
     margin:0;
     position:fixed;
 }
-   
+
 .info i {
    float:left;
    font-size:30px;
@@ -624,7 +631,7 @@ Logo
     left:0;
     margin-left:auto;
     margin-right:auto;
-    position:   absolute;   
+    position:   absolute;
     right:0;
     width:  93px;
 }

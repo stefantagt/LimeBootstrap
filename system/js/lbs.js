@@ -69,7 +69,7 @@ var lbs = lbs || {
 
         //set moment language
         moment.lang(lbs.common.executeVba('Localize.GetLanguage'));
-        
+
 
         //load datasources
         this.vm = lbs.loader.loadDataSources(this.vm, this.config.dataSources, false);
@@ -144,12 +144,12 @@ var lbs = lbs || {
 
         //create viewmodel container
         this.vm = new lbs.vmFactory();
-       
+
         //check connection to Lime
         this.hasLimeConnection = (typeof lbs.limeDataConnection.Application != 'undefined');
 
         //getVersion
-        this.limeVersion =  lbs.hasLimeConnection ? 
+        this.limeVersion =  lbs.hasLimeConnection ?
             lbs.common.parseVersion(lbs.limeDataConnection.Version) : lbs.common.parseVersion("0.0.0")
 
     },
@@ -173,7 +173,7 @@ var lbs = lbs || {
 
         //has limeconnection, try to get decent values
         if(lbs.hasLimeConnection){
-         
+
             //get inspector environment
         	try {
         		//got support for inspectorid
@@ -208,7 +208,7 @@ var lbs = lbs || {
                 lbs.log.warn("Could not determine inspector class, assuming index",e);
                 lbs.activeClass = 'index';
 		    }
-             
+
 	    }
 
 	    //override
@@ -237,7 +237,7 @@ var lbs = lbs || {
         }
         catch (e) {
             lbs.log.error("Could not determine wrapper type",e);
-        }   
+        }
 
         lbs.log.info("Using wrapper type: " + lbs.wrapperType);
         lbs.log.info("Using view: " + lbs.activeClass);
@@ -247,7 +247,7 @@ var lbs = lbs || {
     Find database and server
     */
     setActiveDBandServer: function () {
-       
+
         try {
             lbs.activeServer = lbs.limeDataConnection.Database.ActiveServerName;
             lbs.activeDatabase = lbs.limeDataConnection.Database.Name;
@@ -256,14 +256,14 @@ var lbs = lbs || {
         catch (e) {
             lbs.log.warn("Could not set active server and database");
 
-        }        
+        }
     },
 
         /**
     Find database and server
     */
     setSkin: function () {
-       
+
         try {
             var skin = lbs.common.executeVba("ActionPadTools.GetSkin");
             if(skin == 1){
@@ -277,53 +277,70 @@ var lbs = lbs || {
         catch (e) {
             lbs.log.warn("Could not set the skin");
 
-        }        
+        }
     },
-    
+
+    injectBindings: function() {
+
+        $('.expandable').each(function(index, menuElement) {
+            var jQ_menuElement = $(menuElement);
+            var hash = lbs.activeClass + '_menu_' + index;
+            menuElement.expandableMenu = {
+                isOpen: ko.observable(!jQ_menuElement.hasClass('collapsed') && !$.cookie(hash)),
+                cookieHash: hash
+            };
+            jQ_menuElement.attr('data-bind', 'expandableMenu: $element.expandableMenu.isOpen');
+            jQ_menuElement.children('.menu-header').click(function() {
+                menuElement.expandableMenu.isOpen(!menuElement.expandableMenu.isOpen());
+            });
+        });
+
+    },
+
     /**
     * On click handlers. Executes events when clicked, such as running VBA or manipulating the DOM
-    * 
-    **/ 
+    *
+    **/
     SetOnclickEvents: function () {
 
         //Expandable: Toggels visibility of child-elements of the element. Used in menues
-        $(".expandable").find(".menu-header").click(
-            function () {
-                var menuDiv = $(this).parent()
-                $(this).find("i").first().toggleClass("fa fa-angle-down"); //expanded
-                $(this).find("i").first().toggleClass("fa fa-angle-right"); // Hidden
-                if (menuDiv.hasClass("collapsed")) {
-                     menuDiv.removeClass("collapsed");
-                     menuDiv.children("li").not(".remainHidden").fadeIn(200);
-                     menuDiv.find(":hidden").removeClass("remainHidden");
-                }else{
-                    
-                    menuDiv.addClass("collapsed");
-                    menuDiv.find(":hidden").addClass("remainHidden");
-                    menuDiv.children("li").not(".menu-header").not(".divider").fadeOut(200);
-                }
-            }
-        )
+        // $(".expandable").find(".menu-header").click(
+        //     function () {
+        //         var menuDiv = $(this).parent()
+        //         $(this).find("i").first().toggleClass("fa fa-angle-down"); //expanded
+        //         $(this).find("i").first().toggleClass("fa fa-angle-right"); // Hidden
+        //         if (menuDiv.hasClass("collapsed")) {
+        //              menuDiv.removeClass("collapsed");
+        //              menuDiv.children("li").not(".remainHidden").fadeIn(200);
+        //              menuDiv.find(":hidden").removeClass("remainHidden");
+        //         }else{
+
+        //             menuDiv.addClass("collapsed");
+        //             menuDiv.find(":hidden").addClass("remainHidden");
+        //             menuDiv.children("li").not(".menu-header").not(".divider").fadeOut(200);
+        //         }
+        //     }
+        // )
     },
 
     /**
-    * On load handler. Executes events when the actionpad is loaded, such as running setting up the DOM, hideing things and setting up 
-    * 
+    * On load handler. Executes events when the actionpad is loaded, such as running setting up the DOM, hideing things and setting up
+    *
     **/
     ExecuteOnloadEvents: function () {
 
         //menues
-    
-        $(".expandable").each(function () {
-             // if hidden by some reason, don't fuck with it.
-            if ($(this).hasClass("collapsed")) { //should be hidden if class hidden  exists
-                $(this).find(":hidden").addClass("remainHidden");
-                $(this).find(".menu-header").prepend("<i class='fa fa-angle-right'> </i>");
-                $(this).children("li").not(".menu-header").not(".divider").hide();
-            } else {
-                $(this).find(".menu-header").prepend("<i class='fa fa-angle-down'> </i>");
-            };
-        });
+
+        // $(".expandable").each(function () {
+        //      // if hidden by some reason, don't fuck with it.
+        //     if ($(this).hasClass("collapsed")) { //should be hidden if class hidden  exists
+        //         $(this).find(":hidden").addClass("remainHidden");
+        //         $(this).find(".menu-header").prepend("<i class='fa fa-angle-right'> </i>");
+        //         $(this).children("li").not(".menu-header").not(".divider").hide();
+        //     } else {
+        //         $(this).find(".menu-header").prepend("<i class='fa fa-angle-down'> </i>");
+        //     };
+        // });
 
         //header icons
         $(".header-icon").each(function(){
