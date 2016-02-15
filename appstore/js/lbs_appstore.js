@@ -1,3 +1,5 @@
+appFactory = require("./appmodel.js");
+userModel = require("./usermodel.js");
 var lbsappstore = {
     init: function () {
         $.getJSON('http://api.lime-bootstrap.com/apps?page=1', function (data) {
@@ -10,8 +12,9 @@ var lbsappstore = {
             }
             vm.setActiveApp();
             vm.setInitalFilter();
-            console.log(ko.toJS(vm));
+            //console.log(ko.toJS(vm));
             var u = new userModel();
+            vm.userModel = u;
             ko.applyBindings(vm);
             $('pre code').each(function (i, e) { hljs.highlightBlock(e) });
         });
@@ -237,203 +240,46 @@ var viewModel = function () {
 }
 
 
-/**
-ViewModel for an app
-*/
-var appFactory = function (app, currentpage) {
-    var self = this;
-    self.images = [];
-    self.currentpage = currentpage;
-    /**
-	Sets default picture if app images is missing.
-	*/
-    self.runswithlip = ko.observable(false);
-    if (window.external && window.external.database) {
-        self.runswithlip(true);
-    }
-    if (app.images.indexOf(',') > -1) {
-        self.images = app.images.split(',');
-    }
-    else {
-        self.images.push(app.images)
-    }
 
-    self.smallImage = "";
-    //$.each(self.images, function (index, image) {
 
-        $.each(app.images, function (imageindex, imagedata) {
-            console.log(imagedata);
-            //if (image == imagedata.file_name) {
-            if (imagedata.file_name.indexOf("small") > -1) {
-                self.smallImage = "data:image/" + imagedata.file_type + ";base64," + imagedata.blob.replace("b'", "").replace("'", "");
-            }
-            else {
-                var img = "data:image/" + imagedata.file_type + ";base64," + imagedata.blob.replace("b'", "").replace("'", "");
-                self.smallImage = img
-                self.bigImage = img
-                //}
-                //else {
-                //    self.bigImage = ["../assets/img/_default.png"];
-                //    self.smallImage = ["../assets/img/_default.png"];
-                //}
-            }
+//var userModel = function () {
+//    var self = this;
 
-            //}
-        });
+//    self.username = ko.observable("");
+//    self.password = ko.observable("");
+//    self.userLoggedIn = ko.observable(false);
 
-    //})
-    if (self.smallImage === "") {
-        self.bigImage = ["http://limebootstrap.lundalogik.com/web/appstore/img/_default.png"];
-        self.smallImage = ["http://limebootstrap.lundalogik.com/web/appstore/img/_default.png"];
-    }
+//    self.users = ko.observableArray([
+//    { username: "Linus", password: "linus123" },
+//    { username: "plug", password: "1337" },
+//    { username: "play", password: "12345" }
+//    ]);
 
-    self.changeAppInfo = function (app, item) {
-        console.log(item.currentTarget.id);
-        console.log(app);
-    }
-    //Downloads app
-    self.password = ko.observable('');
-    self.wrongpassword = ko.observable(false);
-    self.logintext = ko.observable('You need to be authenticated to download this application.')
+//    self.userLogin = function () {
+//        if (self.username() != "" && self.password() != "") {
+//            for (var i = 0; i < users().length; i++) {
+//                if (self.users()[i].username === self.username() && self.users()[i].password === self.password()) {
+//                    self.userLoggedIn(true);
+//                    $("#formLogin").hide();
+//                    setTimeout(function() {
+//                        $('[data-toggle="dropdown"]').parent().removeClass('open');
+//                    }, 2000 );
+//                    //alert("Welcome " + self.username() + " .You are now logged in.");
+//                    break;
+//                }
+//            }
+//        }
+//    }
 
-    //self.name = ko.observable(app.name.charAt(0).toUpperCase() + app.name.slice(1))
-    self.name = ko.observable(app.name)
-    self.readme = marked(app.readme);
-    self.expandedApp = ko.observable(false);
-    self.info = ko.mapping.fromJS(app);
-    self.license = ko.observable(app.license);
-    self.statusColor = ko.computed(function () {
-        if (self.info.status) {
-            switch (app.status) {
-                case 'Release':
-                    return "label-success"
-                case 'Beta':
-                    return "label-warning"
-                case 'Development':
-                    return "label-danger"
-                case 'N/A':
-                    return "label-danger"
-            }
-        }
-    });
-    
-    self.position = ko.observable();
-
-    self.scrollPosition = function () {
-        self.position = $(window).scrollTop()
-    };
-
-    self.expandApp = function (app) {
-        self.scrollPosition();
-        app.expandedApp(true);
-        location.hash = app.name()
-        $("#expanded-" + app.name()).modal('show');
-
-    };
-
-    self.closeApp = function (app) {
-        app.expandedApp(false);
-        location.hash = '';
-        $("#expanded-" + app.name()).modal('hide');
-        $(".download-without-password").show();
-        $(".download-with-password").hide();
-        window.scrollTo(0, self.position);
+//    self.userLogout = function (){
+//        self.userLoggedIn(false);
+//        $("#formLogin").show();
+//        setTimeout(function() {
+//            $('[data-toggle="dropdown"]').parent().removeClass('open');
+//        }, 2000 );
         
-    };
-    self.download = function () {
-        if (self.license()) {
-            location.href = 'http://api.lime-bootstrap.com/apps/' + self.name() + '/download'
-        }
-        else{
-            $(".download-without-password").hide();
-            $(".download-with-password").fadeIn();
-            $("#passwordinput").focus();  
-            self.wrongpassword(false);
-        }
-    };
-
-    self.closeLogIn = function () {
-        $("#sign_in").modal('hide');
-        self.passwordOk(false);
-        self.password123('');
-        self.logintext('You need to be authenticated to download this application.');
-    }
-
-    self.downloadApp = function () {
-        if (self.password()!="") {
-            if(self.password() ==="LLAB"){
-                console.log("downloaing app");
-                location.href = 'http://api.lime-bootstrap.com/apps/' + self.name() + '/download'
-                self.password('');
-                self.wrongpassword(false);
-            }
-            else{
-                self.password('');
-                self.wrongpassword(true);
-            }
-        }
-    }
-
-    self.installappwithlip = function () {
-        if (self.name()) {
-            window.external.run('LBSHelper.RunLip', self.name());
-        }
-    }
-
-
-    self.appName = ko.computed(function () {
-        if (self.info) {
-            //return self.info.name().charAt(0).toUpperCase() + self.info.name().slice(1);
-            return self.info.name();
-        } else {
-            //return self.name().charAt(0).toUpperCase() + self.name().slice(1);
-            return self.name();
-        }
-    });
-
-    self.githubAddress = function () {
-        location.href = 'https://github.com/Lundalogik/LimeBootstrapAppStore/tree/master/' + self.name()
-    };
-}
-
-var userModel = function () {
-    var self = this;
-
-    self.username = ko.observable("");
-    self.password = ko.observable("");
-    self.userLoggedIn = ko.observable(false);
-
-    self.users = ko.observableArray([
-    { username: "Linus", password: "linus123" },
-    { username: "plug", password: "1337" },
-    { username: "play", password: "12345" }
-    ]);
-
-    self.userLogin = function () {
-        if (self.username() != "" && self.password() != "") {
-            for (var i = 0; i < users().length; i++) {
-                if (self.users()[i].username === self.username() && self.users()[i].password === self.password()) {
-                    self.userLoggedIn(true);
-                    $("#formLogin").hide();
-                    setTimeout(function() {
-                        $('[data-toggle="dropdown"]').parent().removeClass('open');
-                    }, 2000 );
-                    //alert("Welcome " + self.username() + " .You are now logged in.");
-                    break;
-                }
-            }
-        }
-    }
-
-    self.userLogout = function (){
-        self.userLoggedIn(false);
-        $("#formLogin").show();
-        setTimeout(function() {
-            $('[data-toggle="dropdown"]').parent().removeClass('open');
-        }, 2000 );
-        
-    }
-}
+//    }
+//}
 /**
 Lets get this party on the road
 */
