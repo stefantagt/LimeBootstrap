@@ -158,6 +158,9 @@
 
                                         <button type="button" id="btnLogout" class="btn" data-bind="click: userModel.userLogout">Log out</button>
                                     </form>
+                                    <form style="display: none" id="formYouAreLoggedOut" data-bind="visible: false">
+                                        <h6 data-bind="text: 'Goodbye'"></h6>
+                                    </form>
                                 </div>
                         </li>
                         <li style = "display:none;" data-bind="visible:mergeMenu()"> <div class="input-group menu-appstore-input-group">

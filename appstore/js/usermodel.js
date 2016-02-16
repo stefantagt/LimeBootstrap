@@ -18,7 +18,7 @@ module.exports = function () {
                     $("#formLogin").hide();
                     setTimeout(function() {
                         $('[data-toggle="dropdown"]').parent().removeClass('open');
-                    }, 2000 );
+                    }, 1337*1.49 );
                     //alert("Welcome " + self.username() + " .You are now logged in.");
                     break;
                 }
@@ -28,10 +28,11 @@ module.exports = function () {
 
     self.userLogout = function (){
         self.userLoggedIn(false);
-        $("#formLogin").show();
+        $("#formYouAreLoggedOut").show();
         setTimeout(function() {
+            $("#formYouAreLoggedOut").hide();
             $('[data-toggle="dropdown"]').parent().removeClass('open');
-        }, 2000 );
-        
+            $("#formLogin").show();
+        }, 1337*1.49 );
     }
 }
