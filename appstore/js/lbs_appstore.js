@@ -3,7 +3,8 @@ userModel = require("./usermodel.js");
 var lbsappstore = {
     init: function () {
         $.getJSON('http://api.lime-bootstrap.com/apps?page=1', function (data) {
-            var vm = new viewModel();
+            var um = new userModel();
+            var vm = new viewModel(um);
             vm.populateFromRawData(data)
             vm.pages = ko.observableArray();
             for (i = data._self._current_page; i <= data._self._total_pages; i++) {
@@ -13,8 +14,7 @@ var lbsappstore = {
             vm.setActiveApp();
             vm.setInitalFilter();
             //console.log(ko.toJS(vm));
-            var u = new userModel();
-            vm.userModel = u;
+            //vm.userModel = um;
             ko.applyBindings(vm);
             $('pre code').each(function (i, e) { hljs.highlightBlock(e) });
         });
@@ -24,9 +24,9 @@ var lbsappstore = {
 /**
 ViewModel for whole application
 */
-var viewModel = function () {
+var viewModel = function (userModel) {
     var self = this;
-
+    self.userModel = userModel;
     self.apps = ko.observableArray();
     self.expandedApp = ko.observable();
     self.activeFilter = ko.observable();
@@ -84,7 +84,7 @@ var viewModel = function () {
         
         $(rawData.apps).each(function (index, app) {
             if (app.name) {
-                self.apps.push(new appFactory(app, currentpage))
+                self.apps.push(new appFactory(app, currentpage, userModel))
             }
         });
     }

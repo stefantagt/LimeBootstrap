@@ -2,10 +2,11 @@
 /**
 ViewModel for an app
 */
-module.exports = function (app, currentpage) {
+module.exports = function (app, currentpage, usermodel) {
     var self = this;
     self.images = [];
     self.currentpage = currentpage;
+    self.um = usermodel;
     /**
 	Sets default picture if app images is missing.
 	*/
@@ -90,7 +91,6 @@ module.exports = function (app, currentpage) {
         app.expandedApp(true);
         location.hash = app.name()
         $("#expanded-" + app.name()).modal('show');
-
     };
 
     self.closeApp = function (app) {
