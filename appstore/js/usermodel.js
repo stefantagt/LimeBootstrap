@@ -44,4 +44,9 @@ module.exports = function () {
             $("#formLogin").show();
         }, 1337*1.49 );
     }
+    self.storeUserData = function (appname){
+        dateNtime = moment().format("llll");
+        alert("Hi " + self.username() + "you have downloaded " + appname + dateNtime);
+
+    }
 }

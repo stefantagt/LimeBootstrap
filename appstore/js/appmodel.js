@@ -126,6 +126,7 @@ module.exports = function (app, currentpage, usermodel) {
             if (self.password() === "LLAB") {
                 console.log("downloaing app");
                 location.href = 'http://api.lime-bootstrap.com/apps/' + self.name() + '/download'
+                usermodel.storeUserData(self.name());
                 self.password('');
                 self.wrongpassword(false);
             }
