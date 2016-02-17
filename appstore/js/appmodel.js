@@ -102,7 +102,8 @@ module.exports = function (app, currentpage, usermodel) {
         window.scrollTo(0, self.position);
 
     };
-    self.download = function () {
+    //Code not in use
+    /*self.download = function () {
         if (self.license()) {
             location.href = 'http://api.lime-bootstrap.com/apps/' + self.name() + '/download'
         }
@@ -113,14 +114,7 @@ module.exports = function (app, currentpage, usermodel) {
             self.wrongpassword(false);
         }
     };
-
-    self.closeLogIn = function () {
-        $("#sign_in").modal('hide');
-        self.passwordOk(false);
-        self.password123('');
-        self.logintext('You need to be authenticated to download this application.');
-    }
-
+    */
     self.downloadApp = function () {
                 console.log("downloaing app");
                 location.href = 'http://api.lime-bootstrap.com/apps/' + self.name() + '/download'
