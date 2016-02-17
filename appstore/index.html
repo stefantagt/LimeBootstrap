@@ -44,7 +44,7 @@
                                 <button type="button" class="close" data-bind="click:app.closeApp" aria-hidden="true">&times;</button>
                                 <h4 class="modal-title">
                                     <span data-bind="text:app.appName()"></span>
-                                    <span class="download-without-password" data-bind=" if: userModel.userLoggedIn">
+                                    <span class="download-without-password" data-bind="with userModel, if: userLoggedIn">
                                         <button type="button" class="btn btn-success pull-right download" data-bind="click:app.download, css:{disabled:(app.license()?true:false)},  visible: !app.runswithlip()">                                        
                                             <span data-bind="icon:(app.license()? 'glyphicon-usd' :'glyphicon-cloud-download')"></span>
                                             <span data-bind="text: (app.license()? 'Paid': 'Download')"></span>
@@ -145,18 +145,16 @@
                             <a class="dropdown-toggle" href="#" data-toggle="dropdown" id="navLogin"><i class="fa fa-user"></i></a>
                                 <div class="dropdown-menu" style="padding:15px;">
                                     <form class="form" id="formLogin"> 
-                                        <!--<input class="form-control navbar-appstore-input" style="margin-bottom:10px" placeholder="Username" data-bind="with: userModel, 
-                                        value: username, valueUpdate: 'afterkeydown'"> -->
-                                        <input class="form-control navbar-appstore-input" style="margin-bottom:10px" placeholder="Username" data-bind="
-                                        value: userModel.username, valueUpdate: 'afterkeydown'"> 
-                                        <input class="form-control navbar-appstore-input" type="password" style="margin-bottom:10px" placeholder="Password" data-bind="value: userModel.password, valueUpdate: 'afterkeydown'">
-                                        <button type="button" id="btnLogin" class="btn" data-bind="click: userModel.userLogin">Login</button>
+                                        <input class="form-control navbar-appstore-input" style="margin-bottom:10px" placeholder="Username" data-bind="with: userModel, 
+                                        value: username, valueUpdate: 'afterkeydown'"> 
+                                        <input class="form-control navbar-appstore-input" type="password" style="margin-bottom:10px" placeholder="Password" data-bind="with: userModel, value: password, valueUpdate: 'afterkeydown'">
+                                        <button type="button" id="btnLogin" class="btn" data-bind="with: userModel, click: userLogin()">Login</button>
                                         <a href="https://www.lundalogik.com/crm-systems/"><h6 style="display:inline; float:right;padding-right:5px">Not yet a user of LIME Pro?</h6></a>
                                     </form>
-                                    <form style="display: none" class="formLogOut" data-bind="visible: userModel.userLoggedIn">
-                                        <h6 data-bind="text: userModel.username"></h6>
+                                    <form style="display: none" class="formLogOut" data-bind="visible: userLoggedIn()">
+                                        <h6 data-bind="text: username"></h6>
 
-                                        <button type="button" id="btnLogout" class="btn" data-bind="click: userModel.userLogout">Log out</button>
+                                        <button type="button" id="btnLogout" class="btn" data-bind="click: userLogout()">Log out</button>
                                     </form>
                                 </div>
                         </li>
@@ -254,12 +252,11 @@
     </div>
 
 
-    <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>    
+    <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/knockout-3.0.0.js"></script>
     <script type="text/javascript" src="js/knockout.mapping-latest.js"></script>
     <script type="text/javascript" src="js/highlight.pack.js"></script>
-    <script type="text/javascript" src="js/main.js"></script>
     <script type="text/javascript" src="js/lbs_appstore.js"></script>
     <script type="text/javascript" src="js/marked.js"></script>
     <script type="text/javascript" src="js/moment.js"></script>
