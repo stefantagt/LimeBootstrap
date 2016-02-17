@@ -12,17 +12,27 @@ module.exports = function () {
 
     self.userLogin = function () {    	
         if (self.username() != "" && self.password() != "") {
-        	for (var i = 0; i < self.users().length; i++) {				
-                if (self.users()[i].username === self.username() && self.users()[i].password === self.password()) {
-                    self.userStatus(true);
-                    $("#formLogin").hide();
-                    setTimeout(function() {
-                        $('[data-toggle="dropdown"]').parent().removeClass('open');
-                    }, 1337*1.49 );
-                    break;
-                }
+            self.userStatus(userCheck(self.username(), self.password()));
+            if (self.userStatus()) {
+                $("#formLogin").hide();
+                setTimeout(function() {
+                    $('[data-toggle="dropdown"]').parent().removeClass('open');
+                }, 1337*1.49 );
+            } else {
+                alert("Wrong username or password.")
+            }
+        } else {
+            alert("You have to fill in both username and password.")
+        }
+    }
+
+    function userCheck (username, password) {
+        for (var i = 0; i < self.users().length; i++) {             
+            if (self.users()[i].username === username && self.users()[i].password === password) {
+               return true;
             }
         }
+        return false;
     }
 
     self.userLogout = function (){
