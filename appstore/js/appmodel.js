@@ -122,26 +122,17 @@ module.exports = function (app, currentpage, usermodel) {
     }
 
     self.downloadApp = function () {
-        if (self.password() != "") {
-            if (self.password() === "LLAB") {
                 console.log("downloaing app");
                 location.href = 'http://api.lime-bootstrap.com/apps/' + self.name() + '/download'
                 usermodel.storeUserData(self.name());
-                self.password('');
-                self.wrongpassword(false);
-            }
-            else {
-                self.password('');
-                self.wrongpassword(true);
-            }
-        }
     }
 
-    self.installappwithlip = function () {
+    //Code not in use
+    /*self.installappwithlip = function () {
         if (self.name()) {
             window.external.run('LBSHelper.RunLip', self.name());
         }
-    }
+    }*/
 
 
     self.appName = ko.computed(function () {
