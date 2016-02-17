@@ -30,6 +30,7 @@
                     <h3 data-bind="text: app.appName"></h3>
                     <!-- ko if: app.info -->
                     <span class="label" data-bind="text: (app.license()? 'Paid' :app.info.status()), css: (app.license()?'label-danger':app.statusColor)"></span>
+                    Downloads: <span data-bind="text: app.info.downloads"></span>
                     <p class="desc" data-bind="text:app.info.shortDesc"></p>
                     <!-- /ko -->
                 </div>
