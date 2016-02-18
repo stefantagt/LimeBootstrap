@@ -44,7 +44,7 @@
                                 <button type="button" class="close" data-bind="click:app.closeApp" aria-hidden="true">&times;</button>
                                 <h4 class="modal-title">
                                     <span data-bind="text:app.appName()"></span>
-                                    <span class="download-without-password" data-bind="visible: $root.userModel.userStatus">
+                                    <span class="download-without-password" data-bind="if: $root.userModel.userStatus">
                                         <button type="button" class="btn btn-success pull-right download" data-bind="click:app.downloadApp">
                                             <span data-bind="text: (app.license()? 'Paid': 'Download')"></span>
                                         </button>
@@ -126,7 +126,7 @@
                         <li class="dropdown" id="menuLogin"> 
                             <a class="dropdown-toggle" href="#" data-toggle="dropdown" id="navLogin"><i class="fa fa-user"></i></a>
                                 <div class="dropdown-menu" style="padding:15px;">
-                                    <form class="form" id="formLogin" data-bind="submit: userModel.userLogin, visible: !$root.userModel.userStatus"> 
+                                    <form class="form" id="formLogin" data-bind="submit: userModel.userLogin, ifnot: $root.userModel.userStatus"> 
                                         <!--<input class="form-control navbar-appstore-input" style="margin-bottom:10px" placeholder="Username" data-bind="with: userModel, 
                                         value: username, valueUpdate: 'afterkeydown'"> -->
                                         <input id="username" class="form-control navbar-appstore-input" style="margin-bottom:10px" placeholder="username"> 
