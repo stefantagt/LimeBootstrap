@@ -6,16 +6,9 @@ module.exports = function () {
 
     //Test array, will be back-end later
     self.users = ko.observableArray([
-    { username: "Linus", password: "linus123"},
-    { username: "plug", password: "1337"},
-    { username: "play", password: "12345"}
-    ]);
-
-    //Test array, will be back-end later
-    self.activeSessions = ko.observableArray([
-    { sessionId: "0", username: "Linus"},
-    { sessionId: "1", username: "plug"},
-    { sessionId: "2", username: "play"}
+    { username: "Linus", password: "linus123", sessionId: "0"},
+    { username: "plug", password: "1337", sessionId: "1"},
+    { username: "play", password: "12345", sessionId: "2"}
     ]);
 
     checkCookie();
@@ -23,12 +16,13 @@ module.exports = function () {
     //Login function for user
     self.userLogin = function () {
         if (document.getElementById("username").value != "" && document.getElementById("password").value != "") {
-            self.userStatus(checkPassword(document.getElementById("username").value, document.getElementById("password").value));
-            if (self.userStatus()) {
+            var sessionId = checkPassword(document.getElementById("username").value, document.getElementById("password").value);
+            if (sessionId != "-1") {
                 document.getElementById("username").value = "";
                 document.getElementById("password").value = "";
+                self.userStatus(true);
+                setCookie(sessionId, 7);
                 $("#formLogin").hide();
-                setCookie("1", 7);
                 setTimeout(function() {
                     $('[data-toggle="dropdown"]').parent().removeClass('open');
                 }, 1337*1.49 );
@@ -44,10 +38,10 @@ module.exports = function () {
     function checkPassword (username, password) {
         for (var i = 0; i < self.users().length; i++) {             
             if (self.users()[i].username === username && self.users()[i].password === password) {
-               return true;
+                return self.users()[i].sessionId;
             }
         }
-        return false;
+        return "-1";
     }
 
     //Logut user
@@ -77,7 +71,7 @@ module.exports = function () {
         document.cookie = "sessionId=" + cvalue + "; " + expires;
     }
 
-    function getCookie(sessionId) {
+    function getCookie() {
         var id = "sessionId=";
         var ca = document.cookie.split(';');
         for(var i=0; i<ca.length; i++) {
@@ -91,9 +85,9 @@ module.exports = function () {
     function checkCookie() {
         var sessionId = getCookie();
         if (sessionId != "") {
-            for (var i = 0; i < self.activeSessions().length; i++) {
-                if (self.activeSessions()[i].sessionId === sessionId) {
-                    alert("Welcome again " + self.activeSessions()[i].username);
+            for (var i = 0; i < self.users().length; i++) {
+                if (self.users()[i].sessionId === sessionId) {
+                    alert("Welcome again " + self.users()[i].username);
                     self.userStatus(true); 
                 }
             }
