@@ -59,11 +59,11 @@ module.exports = function () {
     //Send data to server about who downloaded, what app and when.
     self.storeUserData = function (appname){
         dateNtime = moment().format("llll");
-        alert("Hi " + " sessionId " + "you have downloaded " + appname + " at " + dateNtime);
+        alert("Hi " + getCookieUsername(getCookie()) + "you have downloaded " + appname + " at " + dateNtime);
 
     }
 
-    function setCookie(cvalue, exdays) {
+    function setCookie (cvalue, exdays) {
         alert("setCookie" + cvalue + " " + exdays);
         var d = new Date();
         d.setTime(d.getTime() + (exdays*24*60*60*1000));
@@ -71,7 +71,7 @@ module.exports = function () {
         document.cookie = "sessionId=" + cvalue + "; " + expires;
     }
 
-    function getCookie() {
+    function getCookie () {
         var id = "sessionId=";
         var ca = document.cookie.split(';');
         for(var i=0; i<ca.length; i++) {
@@ -82,17 +82,20 @@ module.exports = function () {
         return "";
     }
 
-    function checkCookie() {
+    function checkCookie () {
         var sessionId = getCookie();
         if (sessionId != "") {
-            for (var i = 0; i < self.users().length; i++) {
-                if (self.users()[i].sessionId === sessionId) {
-                    alert("Welcome again " + self.users()[i].username);
-                    self.userStatus(true); 
-                }
-            }
+            self.userStatus(true);
         } else {
             self.userStatus(false);   
+        }
+    }
+
+    function getCookieUsername (sessionId) {
+        for (var i = 0; i < self.users().length; i++) {
+            if (self.users()[i].sessionId === sessionId) {
+                return self.users()[i].username;
+            }
         }
     }
 
