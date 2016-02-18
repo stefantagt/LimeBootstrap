@@ -53,6 +53,7 @@ module.exports = function () {
     //Logut user
     self.userLogout = function (){
         self.userStatus(false);
+        deleteCookie(getCookie());
         $("#formYouAreLoggedOut").show();
         setTimeout(function() {
             $("#formYouAreLoggedOut").hide();
@@ -77,7 +78,7 @@ module.exports = function () {
     }
 
     function getCookie(sessionId) {
-        var id = sessionId + "=";
+        var id = "sessionId=";
         var ca = document.cookie.split(';');
         for(var i=0; i<ca.length; i++) {
             var c = ca[i];
@@ -88,7 +89,7 @@ module.exports = function () {
     }
 
     function checkCookie() {
-        var sessionId = getCookie("sessionId");
+        var sessionId = getCookie();
         if (sessionId != "") {
             for (var i = 0; i < self.activeSessions().length; i++) {
                 if (self.activeSessions()[i].sessionId === sessionId) {
@@ -101,7 +102,7 @@ module.exports = function () {
         }
     }
 
-    function del_cookie(sessionId) {
+    function deleteCookie(sessionId) {
         document.cookie = "sessionId=" + sessionId + "; expires=Thu, 01-Jan-70 00:00:01 GMT;";
     }
 }
