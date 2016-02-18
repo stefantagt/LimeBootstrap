@@ -1,4 +1,4 @@
-body{
+body {
 background-color: #f2f2f2;
 font-family: 'Roboto', sans-serif ;
 }
@@ -8,7 +8,7 @@ font-family: 'Roboto', sans-serif ;
 font-weight: 100;
 	}
 
-.jumbotron{
+.jumbotron {
 	background-color: #A0CE4E;
 	border-color: transparent;
 color:#FFF;
@@ -36,7 +36,7 @@ color:#FFF;
     width:50px;
     margin-left:10px;
 }
-.app{
+.app {
 	
 	background-color: #FFF;
 	height: 350px;
@@ -64,7 +64,7 @@ color:#FFF;
 	box-shadow: rgba(0, 0, 0, 0.0784314) 0px 2px 1px 0px;
 }
 
-.app .carousel .item{
+.app .carousel .item {
 	height: 200px;
 	background-color: #F1F6FF;
 }
@@ -73,7 +73,7 @@ color:#FFF;
 	bottom: 0px;
 
 }
-.app .desc{
+.app .desc {
 	margin-top: 5px;
 	overflow: hidden;
 	height: 40px;
@@ -87,39 +87,39 @@ color:#FFF;
 
 }
 
-.modal .modal-content{
+.modal .modal-content {
  -webkit-animation-delay: 0.3s;
  -ms-animation-delay: 0.3s;
  margin-left:15%;
  margin-right:15%;
 }
 
-.modal .carousel .item{
+.modal .carousel .item {
 	height: 200px;
 }
 
-.modal .modal-dialog{
+.modal .modal-dialog {
 	width: 80%;
 }
 
-.modal .download{
+.modal .download {
 
 	margin-right: 30px;
 }
 
-code{
+code {
 	white-space: inherit;
 }
 
-#loader{
+#loader {
 	padding-top:50px;
 }
-#loader img{
+#loader img {
     display: block;
     margin-left: auto;
     margin-right: auto;
 }
-.license-app{
+.license-app {
 	background-color: #FFD600;
 	margin-top: -10px;
 	margin-bottom: 10px;
@@ -129,45 +129,45 @@ code{
 	line-height: 40px;
 	padding-left: 10px;
 }
-.navbar-appstore{
+.navbar-appstore {
 	padding: 0;
 }
 
-.navbar-appstore-input{
+.navbar-appstore-input {
 	width: 250px;	
 }
-.navbar-appstore-input-group{
+.navbar-appstore-input-group {
 	width: 250px;
 	float: right;	
 	margin-right: 15px;
 	margin-top: 3px;
 	
 }
-#navbar-appstore-search-button{
+#navbar-appstore-search-button {
 	color: #2A6496;
 }
-#navbar-appstore-searchbar{
+#navbar-appstore-searchbar {
 	float: right;		
 }
-.navbar-appstore{
+.navbar-appstore {
 	background-color: #fff; 
 	padding: 5px 15px 5px 35px;
 	margin-right: 10px;
 	margin-left: 10px;	
 }
-.nav-tabs{
+.nav-tabs {
 	border: none;
 }
-.jumbotron{
+.jumbotron {
 	margin-bottom: 0px;
 }
 .nav-tabs>li>a{
 	border-radius: 0;
 }
-.active-appstore{
+.active-appstore {
 	background-color: #f2f2f2;
 }
-#filter-text-appstore{
+#filter-text-appstore {
 	margin-left: 10px;
 }
 .appstore-footer-list {  
@@ -178,13 +178,13 @@ code{
     margin-bottom: 50px;
     text-align:center;
 }
-.pagegroup{
+.pagegroup {
 	margin: auto;
 	width: auto;
 	text-align: center;
 	margin-bottom: 20px;
 }
-.appstore-footer-list li{
+.appstore-footer-list li {
     display:inline;  
     padding-left: 20px;  
     color:#428bca
@@ -197,7 +197,7 @@ code{
     background-color:#fff;
 }
 
-.menu-appstore-input-group{
+.menu-appstore-input-group {
 	width: 250px;
 	float: right;	
 	margin-right: 15px;
@@ -219,7 +219,7 @@ code{
 .downloadOk {
     text-align:center;
 }
-.download-with-password{
+.download-with-password {
 	float: right;
     margin-bottom: 0px;
     display: none;
@@ -227,4 +227,18 @@ code{
     position: absolute;
     top: 15px;
     right: 57px;
+}
+
+.dropdown-menu {
+	padding: 15px;
+}
+
+.login-input {
+	margin-bottom: 10px
+}
+
+#register-user-link {
+	display: inline;
+	padding-right: 5px;
+	float: right;
 }
