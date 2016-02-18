@@ -126,13 +126,12 @@
                         <li class="dropdown" id="menuLogin"> 
                             <a class="dropdown-toggle" href="#" data-toggle="dropdown" id="navLogin"><i class="fa fa-user"></i></a>
                                 <div class="dropdown-menu" style="padding:15px;">
-                                    <form class="form" id="formLogin"> 
+                                    <form class="form" id="formLogin" data-bind="submit: userModel.userLogin"> 
                                         <!--<input class="form-control navbar-appstore-input" style="margin-bottom:10px" placeholder="Username" data-bind="with: userModel, 
                                         value: username, valueUpdate: 'afterkeydown'"> -->
-                                        <input class="form-control navbar-appstore-input" style="margin-bottom:10px" placeholder="Username" data-bind="
-                                        value: userModel.username, valueUpdate: 'afterkeydown'"> 
-                                        <input class="form-control navbar-appstore-input" type="password" style="margin-bottom:10px" placeholder="Password" data-bind="value: userModel.password, valueUpdate: 'afterkeydown'">
-                                        <button type="button" id="btnLogin" class="btn" data-bind="click: userModel.userLogin">Login</button>
+                                        <input id="username" class="form-control navbar-appstore-input" style="margin-bottom:10px" placeholder="username"> 
+                                        <input id="password" class="form-control navbar-appstore-input" type="password" style="margin-bottom:10px" placeholder="password">
+                                        <button id="btnLogin" class="btn" type="submit">Login</button>
                                         <a href="https://www.lundalogik.com/crm-systems/"><h6 style="display:inline; float:right;padding-right:5px">Not yet a user of LIME Pro?</h6></a>
                                     </form>
                                     <form style="display: none" class="formLogOut" data-bind="visible: userModel.userStatus">
