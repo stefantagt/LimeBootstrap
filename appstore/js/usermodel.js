@@ -18,7 +18,6 @@ module.exports = function () {
     { sessionId: "2", username: "play"}
     ]);
 
-    //Check if user has a valid cookie
     checkCookie();
 
     //Login function for user
@@ -54,7 +53,6 @@ module.exports = function () {
     //Logut user
     self.userLogout = function (){
         self.userStatus(false);
-        deleteCookie(getCookie());
         $("#formYouAreLoggedOut").show();
         setTimeout(function() {
             $("#formYouAreLoggedOut").hide();
@@ -67,17 +65,19 @@ module.exports = function () {
     self.storeUserData = function (appname){
         dateNtime = moment().format("llll");
         alert("Hi " + " sessionId " + "you have downloaded " + appname + " at " + dateNtime);
+
     }
 
     function setCookie(cvalue, exdays) {
+        alert("setCookie" + cvalue + " " + exdays);
         var d = new Date();
         d.setTime(d.getTime() + (exdays*24*60*60*1000));
         var expires = "expires="+d.toUTCString();
         document.cookie = "sessionId=" + cvalue + "; " + expires;
     }
 
-    function getCookie() {
-        var id = "sessionId=";
+    function getCookie(sessionId) {
+        var id = sessionId + "=";
         var ca = document.cookie.split(';');
         for(var i=0; i<ca.length; i++) {
             var c = ca[i];
@@ -88,7 +88,7 @@ module.exports = function () {
     }
 
     function checkCookie() {
-        var sessionId = getCookie();
+        var sessionId = getCookie("sessionId");
         if (sessionId != "") {
             for (var i = 0; i < self.activeSessions().length; i++) {
                 if (self.activeSessions()[i].sessionId === sessionId) {
@@ -101,8 +101,7 @@ module.exports = function () {
         }
     }
 
-    //Delete cookie
-    function deleteCookie(sessionId) {
+    function del_cookie(sessionId) {
         document.cookie = "sessionId=" + sessionId + "; expires=Thu, 01-Jan-70 00:00:01 GMT;";
     }
 }
