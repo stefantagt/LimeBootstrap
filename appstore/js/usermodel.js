@@ -18,11 +18,13 @@ module.exports = function () {
         if (document.getElementById("username").value != "" && document.getElementById("password").value != "") {
             var sessionId = checkPassword(document.getElementById("username").value, document.getElementById("password").value);
             if (sessionId != "") {
+                $("#formLogin").hide();
+                var keepLoggedIn = document.getElementById("checkbox-login").value;
+                document.getElementById("checkbox-login").value = false;
                 document.getElementById("username").value = "";
                 document.getElementById("password").value = "";
                 self.userStatus(true);
-                setCookie(sessionId, 7);
-                $("#formLogin").hide();
+                setCookie(sessionId, keepLoggedIn);
                 setTimeout(function() {
                     $('[data-toggle="dropdown"]').parent().removeClass('open');
                 }, 1337*1.49 );
@@ -64,11 +66,15 @@ module.exports = function () {
     }
 
     //Set cooki with sessionId and days valid
-    function setCookie (sessionId, daysValid) {
-        var d = new Date();
-        d.setTime(d.getTime() + (daysValid*24*60*60*1000));
-        var expires = "expires="+d.toUTCString();
-        document.cookie = "sessionId=" + sessionId + "; " + expires;
+    function setCookie (sessionId, keepLoggedIn) {
+        if (keepLoggedIn == "on") {
+            var d = new Date();
+            d.setTime(d.getTime() + (30*24*60*60*1000));
+            var expires = "expires="+d.toUTCString();
+            document.cookie = "sessionId=" + sessionId + "; " + expires;
+        } else {
+            document.cookie = "sessionId=" + sessionId + ";";
+        }
     }
 
     //Get active cookie. Returns sessionId if active else empty string
