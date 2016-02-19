@@ -15,14 +15,14 @@ module.exports = function () {
 
     //Login function for user
     self.userLogin = function () {
-        if (document.getElementById("username").value != "" && document.getElementById("password").value != "") {
-            var sessionId = checkPassword(document.getElementById("username").value, document.getElementById("password").value);
+        if ($("#username").val() != "" && $("#password").val() != "") {
+            var sessionId = checkPassword($("#username").val(), $("#password").val());
             if (sessionId != "") {
                 $("#formLogin").hide();
-                var keepLoggedIn = document.getElementById("checkbox-login").value;
-                document.getElementById("checkbox-login").value = false;
-                document.getElementById("username").value = "";
-                document.getElementById("password").value = "";
+                var keepLoggedIn = $("#checkbox-login").val();
+                $("#checkbox-login").val(false);
+                $("#username").val("");
+                $("#password").val("");
                 self.userStatus(true);
                 setCookie(sessionId, keepLoggedIn);
                 setTimeout(function() {
