@@ -1,9 +1,11 @@
 appFactory = require("./appmodel.js");
 userModel = require("./usermodel.js");
+cookieController = require("./cookie_controller.js");
 var lbsappstore = {
     init: function () {
         $.getJSON('http://api.lime-bootstrap.com/apps?page=1', function (data) {
-            var um = new userModel();
+            var cc = new cookieController();
+            var um = new userModel(cc);
             var vm = new viewModel(um);
             vm.populateFromRawData(data)
             vm.pages = ko.observableArray();

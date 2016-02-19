@@ -1,5 +1,6 @@
-module.exports = function () {
+module.exports = function (cookieController) {
     var self = this;
+    self.cookieController = cookieController;
 
     //Test array, will be back-end later
     self.users = ko.observableArray([
@@ -11,7 +12,7 @@ module.exports = function () {
     //Status of user. "False = not logged in user" - "True = logged in user"
     self.userStatus = ko.observable();
     //Check if user is logged in with valid cookie
-    self.userStatus(checkCookie());
+    self.userStatus(self.cookieController.checkCookie());
 
     //Login function for user
     self.userLogin = function () {
@@ -24,7 +25,7 @@ module.exports = function () {
                 $("#username").val("");
                 $("#password").val("");
                 self.userStatus(true);
-                setCookie(sessionId, keepLoggedIn);
+                self.cookieController.setCookie(sessionId, keepLoggedIn);
                 setTimeout(function() {
                     $('[data-toggle="dropdown"]').parent().removeClass('open');
                 }, 1337*1.49 );
@@ -49,7 +50,7 @@ module.exports = function () {
     //Logut user
     self.userLogout = function (){
         self.userStatus(false);
-        deleteCookie(getCookie());
+        self.cookieController.deleteCookie(self.cookieController.getCookie());
         $("#formYouAreLoggedOut").show();
         setTimeout(function() {
             $("#formYouAreLoggedOut").hide();
@@ -61,57 +62,7 @@ module.exports = function () {
     //Send data to server about who downloaded, what app and when.
     self.storeUserData = function (appname){
         dateNtime = moment().format("llll");
-        alert("Hi " + getCookieUsername(getCookie()) + " you have downloaded " + appname + " at " + dateNtime);
+        alert("Hi " + self.cookieController.getCookieUsername(self.cookieController.getCookie()) + " you have downloaded " + appname + " at " + dateNtime);
 
-    }
-
-    //Set cooki with sessionId and days valid
-    function setCookie (sessionId, keepLoggedIn) {
-        if (keepLoggedIn == "on") {
-            var d = new Date();
-            d.setTime(d.getTime() + (30*24*60*60*1000));
-            var expires = "expires="+d.toUTCString();
-            document.cookie = "sessionId=" + sessionId + "; " + expires;
-        } else {
-            document.cookie = "sessionId=" + sessionId + ";";
-        }
-    }
-
-    //Get active cookie. Returns sessionId if active else empty string
-    function getCookie () {
-        var id = "sessionId=";
-        var ca = document.cookie.split(';');
-        for(var i=0; i<ca.length; i++) {
-            var c = ca[i];
-            while (c.charAt(0)==' ') c = c.substring(1);
-            if (c.indexOf(id) == 0) return c.substring(id.length, c.length);
-        }
-        return "";
-    }
-
-    //Check if there is a valid cookie.
-    function checkCookie () {
-        var sessionId = getCookie();
-        if (sessionId != "" && getCookieUsername(sessionId) != "") {
-           $("#formLogin").hide();
-            return true;
-        } else {
-            return false;   
-        }
-    }
-
-    //Get username connected to sessionId from cookie
-    function getCookieUsername (sessionId) {
-        for (var i = 0; i < self.users().length; i++) {
-            if (self.users()[i].sessionId === sessionId) {
-                return self.users()[i].username;
-            }
-        }
-        return ""; 
-    }
-
-    //Set actvie cookie to time zero and therefore deactivate it
-    function deleteCookie(sessionId) {
-        document.cookie = "sessionId=" + sessionId + "; expires=Thu, 01-Jan-70 00:00:01 GMT;";
     }
 }
