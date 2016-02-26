@@ -3,6 +3,7 @@ userModel = require("./usermodel.js");
 cookieController = require("./cookie_controller.js");
 var lbsappstore = {
     init: function () {
+        $.post('http://localhost:5000/test');
         $.getJSON('http://api.lime-bootstrap.com/apps?page=1', function (data) {
             var cc = new cookieController();
             var um = new userModel(cc);
