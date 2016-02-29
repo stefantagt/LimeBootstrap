@@ -38,14 +38,17 @@ module.exports = function (cookieController) {
         }
     }
 
+    var URL_API_SERVER = "http://0.0.0.0:5000/";
+
     //Check if username and password is valid at back-end
     function checkPassword (username, password) {
         $.ajax({
-            url: "path-till-pythonscript",  //lägg in path till CGI?? eller hur kopplar vi?
+            url: "check_user/" + URL_API_SERVER + username + "/" + password,  //lägg in path till CGI?? eller hur kopplar vi?
             type: "POST",
-            contentType: "application/json; charset=utf-8",
+            contentType: "application/json",
+            data: JSON.stringify({username: username, password: password}),
+            processData: false,
             dataType: "json",
-            data: JSON.stringify({username, password}),
             success: function(response) {
                 alert(response.message)
                 alert(response.data)
