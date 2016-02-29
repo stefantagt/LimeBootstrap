@@ -1,10 +1,11 @@
 appFactory = require("./appmodel.js");
 userModel = require("./usermodel.js");
 cookieController = require("./cookie_controller.js");
+var URL_API_SERVER = "http://0.0.0.0:5000/";
+
 var lbsappstore = {
     init: function () {
-        $.post('http://localhost:5000/test');
-        $.getJSON('http://api.lime-bootstrap.com/apps?page=1', function (data) {
+        $.getJSON(URL_API_SERVER + 'apps?page=1', function (data) {
             var cc = new cookieController();
             var um = new userModel(cc);
             var vm = new viewModel(um);
@@ -47,11 +48,11 @@ var viewModel = function (userModel) {
 
     self.loadMoreData = function(pagenumber){
         if (self.loadedpages.indexOf(pagenumber) == -1){
-            //$.getJSON('http://api.lime-bootstrap.com/apps?page=' + pagenumber, function (data) {
+            //$.getJSON(URL_API_SERVER + pagenumber, function (data) {
             //    self.populateFromRawData(data);
             //});            
                 $.ajax({
-                    url: 'http://api.lime-bootstrap.com/apps?page=' + pagenumber,
+                    url: URL_API_SERVER + 'apps?page=' + pagenumber,
                     type: 'get',
                     dataType: 'json',
                     cache: true,
