@@ -14,6 +14,7 @@ module.exports = function (cookieController) {
     //Check if user is logged in with valid cookie
     self.userStatus(self.cookieController.checkCookie());
 
+
     //Login function for user
     self.userLogin = function () {
         if ($("#username").val() != "" && $("#password").val() != "") {
@@ -37,14 +38,21 @@ module.exports = function (cookieController) {
         }
     }
 
-    //Check if username and password is valid
+    //Check if username and password is valid at back-end
     function checkPassword (username, password) {
-        for (var i = 0; i < self.users().length; i++) {             
-            if (self.users()[i].username === username && self.users()[i].password === password) {
-                return self.users()[i].sessionId;
+        $.ajax({
+            url: "path-till-pythonscript",  //lägg in path till CGI?? eller hur kopplar vi?
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: JSON.stringify({username, password}),
+            success: function(response) {
+                alert(response.message)
+                alert(response.data)
             }
-        }
-        return "";
+        });
+
+       
     }
 
     //Logut user
