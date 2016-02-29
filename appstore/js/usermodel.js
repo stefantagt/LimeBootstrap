@@ -1,6 +1,7 @@
 module.exports = function (cookieController) {
     var self = this;
     self.cookieController = cookieController;
+    var URL_API_SERVER = "http://0.0.0.0:5000/";
 
     //Test array, will be back-end later
     self.users = ko.observableArray([
@@ -18,44 +19,33 @@ module.exports = function (cookieController) {
     //Login function for user
     self.userLogin = function () {
         if ($("#username").val() != "" && $("#password").val() != "") {
-            var sessionId = checkPassword($("#username").val(), $("#password").val());
-            if (sessionId != "") {
-                $("#formLogin").hide();
-                var keepLoggedIn = $("#checkbox-login").val();
-                $("#checkbox-login").val(false);
-                $("#username").val("");
-                $("#password").val("");
-                self.userStatus(true);
-                self.cookieController.setCookie(sessionId, keepLoggedIn);
-                setTimeout(function() {
-                    $('[data-toggle="dropdown"]').parent().removeClass('open');
-                }, 1337*1.49 );
-            } else {
-                alert("Wrong username or password.")
-            }
+            var user = {}
+            user["emailId"] = $("#username").val();
+            user["password"] = $("#password").val();
+            $.ajax({
+                url: URL_API_SERVER + 'check_access',
+                data: JSON.stringify(user),
+                type: 'POST',
+                dataType: 'json',
+                success: function (data) {
+                    $("#formLogin").hide();
+                    //var keepLoggedIn = $("#checkbox-login").val();
+                    $("#checkbox-login").val(false);
+                    $("#username").val("");
+                    $("#password").val("");
+                    self.userStatus(true);
+                    //self.cookieController.setCookie(sessionId, keepLoggedIn);
+                    setTimeout(function() {
+                        $('[data-toggle="dropdown"]').parent().removeClass('open')
+                    }, 1337*1.49 );
+                },
+                error: function () {
+                    alert("Wrong username or password.");
+                }
+            });
         } else {
-            alert("You have to fill in both username and password.")
+            alert("You have to fill in both username and password.");
         }
-    }
-
-    var URL_API_SERVER = "http://0.0.0.0:5000/";
-
-    //Check if username and password is valid at back-end
-    function checkPassword (username, password) {
-        $.ajax({
-            url: "check_user/" + URL_API_SERVER + username + "/" + password,  //lägg in path till CGI?? eller hur kopplar vi?
-            type: "POST",
-            contentType: "application/json",
-            data: JSON.stringify({username: username, password: password}),
-            processData: false,
-            dataType: "json",
-            success: function(response) {
-                alert(response.message)
-                alert(response.data)
-            }
-        });
-
-       
     }
 
     //Logut user
