@@ -3,13 +3,6 @@ module.exports = function (cookieController) {
     self.cookieController = cookieController;
     var URL_API_SERVER = "http://0.0.0.0:5000/";
 
-    //Test array, will be back-end later
-    self.users = ko.observableArray([
-    { username: "Linus", password: "linus123", sessionId: "0"},
-    { username: "plug", password: "1337", sessionId: "1"},
-    { username: "play", password: "12345", sessionId: "2"}
-    ]);
-
     //Status of user. "False = not logged in user" - "True = logged in user"
     self.userStatus = ko.observable();
     //Check if user is logged in with valid cookie
@@ -62,8 +55,21 @@ module.exports = function (cookieController) {
 
     //Send data to server about who downloaded, what app and when.
     self.storeUserData = function (appname){
-        dateNtime = moment().format("llll");
-        alert("Hi " + self.cookieController.getCookieUsername(self.cookieController.getCookie()) + " you have downloaded " + appname + " at " + dateNtime);
-
+        var download = {}
+            download["time"] = moment().format("llll");
+            download["email"] = self.cookieController.getCookie();
+            download["appId"] = appname;
+            $.ajax({
+                url: URL_API_SERVER + 'store_download',
+                data: JSON.stringify(download),
+                type: 'POST',
+                dataType: 'json',
+                success: function (data) {
+                    alert("Hi " + self.cookieController.getCookie() + " you have downloaded " + appname + " at " + dateNtime);
+                },
+                error: function () {
+                    alert("Didn't store download data");
+                }
+            });
     }
 }
