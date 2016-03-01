@@ -29,12 +29,12 @@ module.exports = function (cookieController) {
                 dataType: 'json',
                 success: function (data) {
                     $("#formLogin").hide();
-                    //var keepLoggedIn = $("#checkbox-login").val();
+                    var keepLoggedIn = $("#checkbox-login").val();
+                    self.cookieController.setCookie($("#username").val(), keepLoggedIn);
                     $("#checkbox-login").val(false);
                     $("#username").val("");
                     $("#password").val("");
                     self.userStatus(true);
-                    //self.cookieController.setCookie(sessionId, keepLoggedIn);
                     setTimeout(function() {
                         $('[data-toggle="dropdown"]').parent().removeClass('open')
                     }, 1337*1.49 );
