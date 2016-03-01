@@ -117,7 +117,7 @@ module.exports = function (app, currentpage, usermodel) {
     */
     self.downloadApp = function () {
                 console.log("downloaing app");
-                location.href = URL_API_SERVER + 'apps/' + self.name() + '/download'
+                location.href = 'http://api.lime-bootstrap.com/apps/' + self.name() + '/download'
                 usermodel.storeUserData(self.name());
     }
 
