@@ -56,16 +56,15 @@ module.exports = function (cookieController) {
     //Send data to server about who downloaded, what app and when.
     self.storeUserData = function (appname){
         var download = {}
-            download["time"] = moment().format("llll");
             download["email"] = self.cookieController.getCookie();
-            download["appId"] = appname;
+            download["app"] = appname;
             $.ajax({
                 url: URL_API_SERVER + 'store_download',
                 data: JSON.stringify(download),
                 type: 'POST',
                 dataType: 'json',
                 success: function (data) {
-                    alert("Hi " + self.cookieController.getCookie() + " you have downloaded " + appname + " at " + dateNtime);
+                    alert("Hi " + self.cookieController.getCookie() + " you have downloaded " + appname);
                 },
                 error: function () {
                     alert("Didn't store download data");
