@@ -1,7 +1,7 @@
 module.exports = function (cookieController) {
     var self = this;
     self.cookieController = cookieController;
-    var URL_API_SERVER = "http://0.0.0.0:5000/";
+    var URL_API_SERVER = "http://localhost:5000/";
 
     //Status of user. "False = not logged in user" - "True = logged in user"
     self.userStatus = ko.observable();
@@ -63,6 +63,7 @@ module.exports = function (cookieController) {
                 data: JSON.stringify(download),
                 type: 'POST',
                 dataType: 'json',
+                async: false,
                 success: function (data) {
                     alert("Hi " + self.cookieController.getCookie() + " you have downloaded " + appname);
                 },
