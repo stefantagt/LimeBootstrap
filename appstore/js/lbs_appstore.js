@@ -1,5 +1,5 @@
 appFactory = require("./appmodel.js");
-userModel = require("./usermodel.js");
+personModel = require("./personmodel.js");
 cookieController = require("./cookie_controller.js");
 var URL_API_SERVER = "http://localhost:5000/";
 
@@ -7,7 +7,7 @@ var lbsappstore = {
     init: function () {
         $.getJSON(URL_API_SERVER + 'apps?page=1', function (data) {
             var cc = new cookieController();
-            var um = new userModel(cc);
+            var um = new personModel(cc);
             var vm = new viewModel(um);
             vm.populateFromRawData(data)
             vm.pages = ko.observableArray();
@@ -18,7 +18,7 @@ var lbsappstore = {
             vm.setActiveApp();
             vm.setInitalFilter();
             //console.log(ko.toJS(vm));
-            //vm.userModel = um;
+            //vm.personModel = um;
             ko.applyBindings(vm);
             $('pre code').each(function (i, e) { hljs.highlightBlock(e) });
         });
@@ -28,9 +28,9 @@ var lbsappstore = {
 /**
 ViewModel for whole application
 */
-var viewModel = function (userModel) {
+var viewModel = function (personModel) {
     var self = this;
-    self.userModel = userModel;
+    self.personModel = personModel;
     self.apps = ko.observableArray();
     self.expandedApp = ko.observable();
     self.activeFilter = ko.observable();
@@ -88,7 +88,7 @@ var viewModel = function (userModel) {
         
         $(rawData.apps).each(function (index, app) {
             if (app.name) {
-                self.apps.push(new appFactory(app, currentpage, userModel))
+                self.apps.push(new appFactory(app, currentpage, personModel))
             }
         });
     }

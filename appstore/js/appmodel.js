@@ -2,11 +2,11 @@
 /**
 ViewModel for an app
 */
-module.exports = function (app, currentpage, usermodel) {
+module.exports = function (app, currentpage, personmodel) {
     var self = this;
     self.images = [];
     self.currentpage = currentpage;
-    self.um = usermodel;
+    self.um = personmodel;
     /**
 	Sets default picture if app images is missing.
 	*/
@@ -91,7 +91,7 @@ module.exports = function (app, currentpage, usermodel) {
         app.expandedApp(true);
         location.hash = app.name()
         $("#expanded-" + app.name()).modal('show');
-        if(usermodel.userStatus()){
+        if(personmodel.personStatus()){
             $(".license-app").hide();
         }
     };
@@ -121,7 +121,7 @@ module.exports = function (app, currentpage, usermodel) {
     self.downloadApp = function () {
                 console.log("downloaing app");
                 location.href = 'http://api.lime-bootstrap.com/apps/' + self.name() + '/download'
-                usermodel.storeUserData(self.name());
+                personmodel.storepersonData(self.name());
     }
 
     //Code not in use
