@@ -91,6 +91,9 @@ module.exports = function (app, currentpage, usermodel) {
         app.expandedApp(true);
         location.hash = app.name()
         $("#expanded-" + app.name()).modal('show');
+        if(usermodel.userStatus()){
+            $(".license-app").hide();
+        }
     };
 
     self.closeApp = function (app) {
