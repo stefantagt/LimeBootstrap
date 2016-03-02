@@ -16,7 +16,7 @@ module.exports = function (cookieController) {
             person["email"] = $("#email").val();
             person["password"] = $("#password").val();
             $.ajax({
-                url: URL_API_SERVER + 'check_access',
+                url: URL_API_SERVER + 'check_person_access',
                 data: JSON.stringify(person),
                 type: 'POST',
                 dataType: 'json',
