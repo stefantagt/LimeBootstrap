@@ -21,6 +21,7 @@ module.exports = function (cookieController) {
                 type: 'POST',
                 dataType: 'json',
                 success: function (data) {
+                    if(data){
                     $("#formLogin").hide();
                     var keepLoggedIn = $("#checkbox-login").val();
                     self.cookieController.setCookie($("#username").val(), keepLoggedIn);
@@ -31,9 +32,10 @@ module.exports = function (cookieController) {
                     setTimeout(function() {
                         $('[data-toggle="dropdown"]').parent().removeClass('open')
                     }, 1337*1.49 );
-                },
-                error: function () {
-                    alert("Wrong username or password.");
+                }
+                    else{
+                        alert("Wrong username or password")
+                    }
                 }
             });
         } else {
