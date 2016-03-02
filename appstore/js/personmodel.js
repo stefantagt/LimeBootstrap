@@ -13,7 +13,7 @@ module.exports = function (cookieController) {
     self.personLogin = function () {
         if ($("#email").val() != "" && $("#password").val() != "") {
             var person = {}
-            person["emailId"] = $("#email").val();
+            person["email"] = $("#email").val();
             person["password"] = $("#password").val();
             $.ajax({
                 url: URL_API_SERVER + 'check_access',
