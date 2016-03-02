@@ -1,7 +1,7 @@
 appFactory = require("./appmodel.js");
 personModel = require("./personmodel.js");
 cookieController = require("./cookie_controller.js");
-var URL_API_SERVER = "http://0.0.0.0:5000/";
+var URL_API_SERVER = "http://localhost:5000/";
 
 var lbsappstore = {
     init: function () {
