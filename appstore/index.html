@@ -44,7 +44,7 @@
                                 <button type="button" class="close" data-bind="click: app.closeApp" aria-hidden="true">&times;</button>
                                 <h4 class="modal-title">
                                     <span data-bind="text: app.appName()"></span>
-                                    <span class="download-without-password" data-bind="if: $root.userModel.userStatus">
+                                    <span class="download-without-password" data-bind="if: $root.personModel.personStatus">
                                         <button type="button" class="btn btn-success pull-right download" data-bind="click: app.downloadApp">
                                             <span data-bind="text: (app.license()? 'Paid': 'Download')"></span>
                                         </button>
@@ -57,7 +57,7 @@
                             </div>
 
                             <div class="modal-body">
-                                <div class="license-app" data-bind="ifnot: $root.userModel.userStatus, icon: 'glyphicon-flag'">You need to be logged in order to download this app. <a href="http://www.lundalogik.com/about-us/contact-us/find-us/">please contact us!</a></div>
+                                <div class="license-app" data-bind="ifnot: $root.personModel.personStatus, icon: 'glyphicon-flag'">You need to be logged in order to download this app. <a href="http://www.lundalogik.com/about-us/contact-us/find-us/">please contact us!</a></div>
                                 <!-- App images-->
                                 <div class="carousel slide" data-ride="carousel" data-bind="attr: {id: 'carousel-large' + app.name()}">
                                     <!-- Wrapper for slides -->
@@ -126,23 +126,23 @@
                         <li class="dropdown" id="menuLogin"> 
                             <a class="dropdown-toggle" href="#" data-toggle="dropdown" id="navLogin"><i class="fa fa-user"></i></a>
                                 <div class="dropdown-menu">
-                                    <form class="form" id="formLogin" data-bind="submit: userModel.userLogin"> 
-                                        <!--<input class="form-control navbar-appstore-input" style="margin-bottom: 10px" placeholder="Username" data-bind="with: userModel, 
-                                        value: username, valueUpdate: 'afterkeydown'"/> -->
-                                        <input id="username" class="form-control navbar-appstore-input login-input" placeholder="username" /> 
+                                    <form class="form" id="formLogin" data-bind="submit: personModel.personLogin"> 
+                                        <!--<input class="form-control navbar-appstore-input" style="margin-bottom: 10px" placeholder="email" data-bind="with: personModel, 
+                                        value: email, valueUpdate: 'afterkeydown'"/> -->
+                                        <input id="email" class="form-control navbar-appstore-input login-input" placeholder="email" /> 
                                         <input id="password" class="form-control navbar-appstore-input login-input" type="password" placeholder="password" />
                                         <button id="btnLogin" class="btn" type="submit">Login</button>
-                                        <a id="register-user-link" href="https://www.lundalogik.com/crm-systems/">Not yet a user of LIME Pro?</a>
+                                        <a id="register-person-link" href="https://www.lundalogik.com/crm-systems/">Not yet a user of LIME Pro?</a>
                                         <input type="checkbox" name="checkbox" checked="checked" id="checkbox-login" /> Keep me logged in.
                                     </form>
 
-                                    <form class="formLogOut" data-bind="visible: userModel.userStatus">
-                                        <h6 data-bind="text: userModel.username"></h6>
-                                        <button type="button" id="btnLogout" class="btn" data-bind="click: userModel.userLogout">Log out</button>
+                                    <form class="formLogOut" data-bind="visible: personModel.personStatus">
+                                        <h6 data-bind="text: personModel.email"></h6>
+                                        <button type="button" id="btnLogout" class="btn" data-bind="click: personModel.personLogout">Log out</button>
                                     </form>
 
                                     <form id="formYouAreLoggedOut" data-bind="visible: false">
-                                        <h6 data-bind="text: 'Goodbye user'">
+                                        <h6 data-bind="text: 'Goodbye'">
 
                                         </h6>
                                     </form>

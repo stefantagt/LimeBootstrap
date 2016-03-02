@@ -3,49 +3,49 @@ module.exports = function (cookieController) {
     self.cookieController = cookieController;
     var URL_API_SERVER = "http://localhost:5000/";
 
-    //Status of user. "False = not logged in user" - "True = logged in user"
-    self.userStatus = ko.observable();
-    //Check if user is logged in with valid cookie
-    self.userStatus(self.cookieController.checkCookie());
+    //Status of person. "False = not logged in person" - "True = logged in person"
+    self.personStatus = ko.observable();
+    //Check if person is logged in with valid cookie
+    self.personStatus(self.cookieController.checkCookie());
 
 
-    //Login function for user
-    self.userLogin = function () {
-        if ($("#username").val() != "" && $("#password").val() != "") {
-            var user = {}
-            user["emailId"] = $("#username").val();
-            user["password"] = $("#password").val();
+    //Login function for person
+    self.personLogin = function () {
+        if ($("#email").val() != "" && $("#password").val() != "") {
+            var person = {}
+            person["emailId"] = $("#email").val();
+            person["password"] = $("#password").val();
             $.ajax({
                 url: URL_API_SERVER + 'check_access',
-                data: JSON.stringify(user),
+                data: JSON.stringify(person),
                 type: 'POST',
                 dataType: 'json',
                 success: function (data) {
                     if(data){
                     $("#formLogin").hide();
                     var keepLoggedIn = $("#checkbox-login").val();
-                    self.cookieController.setCookie($("#username").val(), keepLoggedIn);
+                    self.cookieController.setCookie($("#email").val(), keepLoggedIn);
                     $("#checkbox-login").val(false);
-                    $("#username").val("");
+                    $("#email").val("");
                     $("#password").val("");
-                    self.userStatus(true);
+                    self.personStatus(true);
                     setTimeout(function() {
                         $('[data-toggle="dropdown"]').parent().removeClass('open')
                     }, 1337*1.49 );
                 }
                     else{
-                        alert("Wrong username or password")
+                        alert("Wrong email or password")
                     }
                 }
             });
         } else {
-            alert("You have to fill in both username and password.");
+            alert("You have to fill in both email and password.");
         }
     }
 
-    //Logut user
-    self.userLogout = function (){
-        self.userStatus(false);
+    //Logut person
+    self.personLogout = function (){
+        self.personStatus(false);
         self.cookieController.deleteCookie(self.cookieController.getCookie());
         $("#formYouAreLoggedOut").show();
         setTimeout(function() {
@@ -56,7 +56,7 @@ module.exports = function (cookieController) {
     }
 
     //Send data to server about who downloaded, what app and when.
-    self.storeUserData = function (appname){
+    self.storepersonData = function (appname){
         var download = {}
             download["email"] = self.cookieController.getCookie();
             download["app"] = appname;
