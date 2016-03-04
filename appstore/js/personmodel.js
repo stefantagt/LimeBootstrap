@@ -31,6 +31,8 @@ module.exports = function (cookieController) {
                     self.personStatus(true);
                     setTimeout(function() {
                         $('[data-toggle="dropdown"]').parent().removeClass('open')
+                    $('#menuLogIn').show()
+
                     }, 1337*1.49 );
                 }
                     else{

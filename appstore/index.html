@@ -123,7 +123,15 @@
                         <li><a href="/tutorial/" target="_blank" >Tutorial</a></li>
                         <li><a href="/appstore/">Appstore</a></li>
 
-                        <li class="dropdown" id="menuLogin"> 
+                            <li id="menuLoggedIn" data-bind="ifnot: personModel.personStatus, ifnot: mergeMenu"> 
+                                    <form class="form" id="formLogin" data-bind="submit: personModel.personLogin"> 
+                                        <input id="email" class="form-control navbar-appstore-input login-input" placeholder="email" /> 
+                                        <input id="password" class="form-control navbar-appstore-input login-input" type="password" placeholder="password" />
+                                        <button id="btnLogin" class="btn" type="submit">Login</button>
+                                    </form>
+                        </li>
+
+                        <li class="dropdown" id="menuLogin" data-bind="if: mergeMenu"> 
                             <a class="dropdown-toggle" href="#" data-toggle="dropdown" id="navLogin"><i class="fa fa-user"></i></a>
                                 <div class="dropdown-menu">
                                     <form class="form" id="formLogin" data-bind="submit: personModel.personLogin"> 
