@@ -123,15 +123,16 @@
                         <li><a href="/tutorial/" target="_blank" >Tutorial</a></li>
                         <li><a href="/appstore/">Appstore</a></li>
 
-                            <li id="menuLoggedIn" data-bind="ifnot: personModel.personStatus, ifnot: mergeMenu"> 
+                            <li id="menuLogInFields" data-bind="ifnot: personModel.personStatus, ifnot: mergeMenu"> 
                                     <form class="form" id="formLogin" data-bind="submit: personModel.personLogin"> 
                                         <input id="email" class="form-control navbar-appstore-input login-input" placeholder="email" /> 
                                         <input id="password" class="form-control navbar-appstore-input login-input" type="password" placeholder="password" />
                                         <button id="btnLogin" class="btn" type="submit">Login</button>
                                     </form>
+                                    <input type="checkbox" name="checkbox" checked="checked" id="checkbox-login" /> Keep me logged in.
                         </li>
 
-                        <li class="dropdown" id="menuLogin" data-bind="if: mergeMenu"> 
+                        <li class="dropdown" id="menuLogin" style="display:none;" data-bind="visible: mergeMenu, ifnot: personModel.personStatus"> 
                             <a class="dropdown-toggle" href="#" data-toggle="dropdown" id="navLogin"><i class="fa fa-user"></i></a>
                                 <div class="dropdown-menu">
                                     <form class="form" id="formLogin" data-bind="submit: personModel.personLogin"> 
@@ -143,7 +144,11 @@
                                         <a id="register-person-link" href="https://www.lundalogik.com/crm-systems/">Not yet a user of LIME Pro?</a>
                                         <input type="checkbox" name="checkbox" checked="checked" id="checkbox-login" /> Keep me logged in.
                                     </form>
-
+                                </div>
+                        </li>
+                         <li class="dropdown" id="menuLoggedIn" data-bind="if: personModel.personStatus"> 
+                            <a class="dropdown-toggle" href="#" data-toggle="dropdown" id="navLogin"><i class="fa fa-user"></i></a>
+                                <div class="dropdown-menu">
                                     <form class="formLogOut" data-bind="visible: personModel.personStatus">
                                         <h6 data-bind="text: personModel.email"></h6>
                                         <button type="button" id="btnLogout" class="btn" data-bind="click: personModel.personLogout">Log out</button>

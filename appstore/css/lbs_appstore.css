@@ -203,7 +203,7 @@ code {
 	margin-right: 15px;
 	margin-top: 10px;
 }
-#menuLoggedIn .login-input{
+#menuLogInFields .login-input{
 	float: left;
 	width: 175px;
 	margin-left: 2px;
@@ -211,7 +211,7 @@ code {
 #btnLogin{
 	margin-left: 2px;
 }
-#menuLoggedIn{
+#menuLogInFields{
 	margin-top: 7.5px;
 }
 #myModal {
