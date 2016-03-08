@@ -9,7 +9,7 @@ var lbsappstore = {
             var cc = new cookieController();
             var um = new personModel(cc);
             var vm = new viewModel(um);
-            vm.populateFromRawData(data)
+            vm.populateFromRawData(data);
             vm.pages = ko.observableArray();
             for (i = data._self._current_page; i <= data._self._total_pages; i++) {
                 vm.pages.push(new vm.pageFactory(i));

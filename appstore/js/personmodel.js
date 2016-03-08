@@ -11,6 +11,7 @@ module.exports = function (cookieController) {
 
     //Login function for person
     self.personLogin = function () {
+        alert("personLogin");
         var email = $("#email").val();
         var password = $("#password").val();
         if (email != "" && password != "") {
@@ -46,6 +47,7 @@ module.exports = function (cookieController) {
 
     //Logut person
     self.personLogout = function (){
+        alert("personLogout");
         self.personStatus(false);
         self.cookieController.deleteCookie(self.cookieController.getCookie());
         $('[data-toggle="dropdown"]').parent().removeClass('open');
@@ -54,6 +56,7 @@ module.exports = function (cookieController) {
 
     //Send data to server about who downloaded, what app and when.
     self.storepersonData = function (appname){
+        alert("storePersondata");
         var download = {}
             download["email"] = self.cookieController.getCookie();
             download["app"] = appname;
