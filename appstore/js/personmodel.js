@@ -11,10 +11,12 @@ module.exports = function (cookieController) {
 
     //Login function for person
     self.personLogin = function () {
-        if ($("#email").val() != "" && $("#password").val() != "") {
+        var email = $("#email").val();
+        var password = $("#password").val();
+        if (email != "" && password != "") {
             var person = {}
-            person["email"] = $("#email").val();
-            person["password"] = $("#password").val();
+            person["email"] = email;
+            person["password"] = password;
             $.ajax({
                 url: URL_API_SERVER + 'check_person_access',
                 data: JSON.stringify(person),
@@ -23,11 +25,8 @@ module.exports = function (cookieController) {
                 success: function (data) {
                     if(data){
                     $("#formLogin").hide();
-                    var keepLoggedIn = $("#checkbox-login").val();
-                    self.cookieController.setCookie($("#email").val(), keepLoggedIn);
+                    self.cookieController.setCookie(email);
                     $("#checkbox-login").val(false);
-                    $("#email").val("");
-                    $("#password").val("");
                     self.personStatus(true);
                     setTimeout(function() {
                         $('[data-toggle="dropdown"]').parent().removeClass('open');
@@ -42,6 +41,7 @@ module.exports = function (cookieController) {
         } else {
             alert("You have to fill in both email and password.");
         }
+        $("#password").val("");
     }
 
     //Logut person
