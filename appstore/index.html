@@ -44,7 +44,7 @@
                                 <button type="button" class="close" data-bind="click: app.closeApp" aria-hidden="true">&times;</button>
                                 <h4 class="modal-title">
                                     <span data-bind="text: app.appName()"></span>
-                                    <span class="download-without-password" data-bind="if: $root.personModel.personStatus">
+                                    <span class="downloadApp" data-bind="if: $root.personModel.personStatus">
                                         <button type="button" class="btn btn-success pull-right download" data-bind="click: app.downloadApp">
                                             <span data-bind="text: (app.license()? 'Paid': 'Download')"></span>
                                         </button>

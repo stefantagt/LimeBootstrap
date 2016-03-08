@@ -100,8 +100,7 @@ module.exports = function (app, currentpage, personmodel) {
         app.expandedApp(false);
         location.hash = '';
         $("#expanded-" + app.name()).modal('hide');
-        $(".download-without-password").show();
-        $(".download-with-password").hide();
+        $(".downloadApp").show();
         window.scrollTo(0, self.position);
 
     };
