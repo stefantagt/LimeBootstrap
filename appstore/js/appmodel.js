@@ -92,7 +92,7 @@ module.exports = function (app, currentpage, personmodel) {
         location.hash = app.name()
         $("#expanded-" + app.name()).modal('show');
         if(personmodel.personStatus()){
-            $(".license-app").hide();
+            $(".not-logged-in").hide();
         }
     };
 

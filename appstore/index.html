@@ -57,7 +57,8 @@
                             </div>
 
                             <div class="modal-body">
-                                <div class="license-app" data-bind="icon:'glyphicon-flag'">You need to be logged in order to download this app. <a href="http://www.lundalogik.com/about-us/contact-us/find-us/">please contact us!</a></div>
+                                <div class="license-app" data-bind="icon:'glyphicon-flag', visible: app.license">You need to pay for this app, <a href="http://www.lundalogik.com/about-us/contact-us/find-us/">please contact us!</a></div>
+                                <div class="not-logged-in" data-bind="icon:'glyphicon-flag'">You need to be logged in order to download this app. <a href="http://www.lundalogik.com/about-us/contact-us/find-us/">please contact us!</a></div>
                                 <!-- App images-->
                                 <div class="carousel slide" data-ride="carousel" data-bind="attr: {id: 'carousel-large' + app.name()}">
                                     <!-- Wrapper for slides -->
