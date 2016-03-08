@@ -7,8 +7,8 @@ var lbsappstore = {
     init: function () {
         $.getJSON(URL_API_SERVER + 'apps?page=1', function (data) {
             var cc = new cookieController();
-            var um = new personModel(cc);
-            var vm = new viewModel(um);
+            var pm = new personModel(cc);
+            var vm = new viewModel(pm);
             vm.populateFromRawData(data);
             vm.pages = ko.observableArray();
             for (i = data._self._current_page; i <= data._self._total_pages; i++) {
@@ -17,8 +17,6 @@ var lbsappstore = {
             }
             vm.setActiveApp();
             vm.setInitalFilter();
-            //console.log(ko.toJS(vm));
-            //vm.personModel = um;
             ko.applyBindings(vm);
             $('pre code').each(function (i, e) { hljs.highlightBlock(e) });
         });

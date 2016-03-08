@@ -1,17 +1,12 @@
 module.exports = function (cookieController) {
     var self = this;
     self.cookieController = cookieController;
-    var URL_API_SERVER = "http://localhost:5000/";
-
     //Status of person. "False = not logged in person" - "True = logged in person"
-    self.personStatus = ko.observable();
-    //Check if person is logged in with valid cookie
-    self.personStatus(self.cookieController.checkCookie());
-
+    self.personStatus = ko.observable(self.cookieController.checkCookie());
+    var URL_API_SERVER = "http://localhost:5000/";
 
     //Login function for person
     self.personLogin = function () {
-        alert("personLogin");
         var email = $("#email").val();
         var password = $("#password").val();
         if (email != "" && password != "") {
@@ -47,7 +42,6 @@ module.exports = function (cookieController) {
 
     //Logut person
     self.personLogout = function (){
-        alert("personLogout");
         self.personStatus(false);
         self.cookieController.deleteCookie(self.cookieController.getCookie());
         $('[data-toggle="dropdown"]').parent().removeClass('open');
@@ -56,7 +50,6 @@ module.exports = function (cookieController) {
 
     //Send data to server about who downloaded, what app and when.
     self.storepersonData = function (appname){
-        alert("storePersondata");
         var download = {}
             download["email"] = self.cookieController.getCookie();
             download["app"] = appname;
