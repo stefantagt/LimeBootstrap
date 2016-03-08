@@ -30,13 +30,12 @@ module.exports = function (cookieController) {
                     $("#password").val("");
                     self.personStatus(true);
                     setTimeout(function() {
-                        $('[data-toggle="dropdown"]').parent().removeClass('open')
-                    $('#menuLogIn').show()
-
+                        $('[data-toggle="dropdown"]').parent().removeClass('open');
+                        $('#menuLogIn').show();
                     }, 1337*1.49 );
                 }
                     else{
-                        alert("Wrong email or password")
+                        alert("Wrong email or password");
                     }
                 }
             });
@@ -49,12 +48,8 @@ module.exports = function (cookieController) {
     self.personLogout = function (){
         self.personStatus(false);
         self.cookieController.deleteCookie(self.cookieController.getCookie());
-        $("#formYouAreLoggedOut").show();
-        setTimeout(function() {
-            $("#formYouAreLoggedOut").hide();
-            $('[data-toggle="dropdown"]').parent().removeClass('open');
-            $("#formLogin").show();
-        }, 1337*1.49 );
+        $('[data-toggle="dropdown"]').parent().removeClass('open');
+        $("#formLogin").show();
     }
 
     //Send data to server about who downloaded, what app and when.
