@@ -252,6 +252,7 @@ code {
 
 .dropdown-menu {
 	padding: 15px;
+	min-width: 282px;
 }
 
 .login-input {
