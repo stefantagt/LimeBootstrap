@@ -12,7 +12,7 @@ module.exports = function (cookieController) {
         if (email != "" && password != "") {
             $.ajax({
                 url: URL_API_SERVER + 'check_person_access',
-                data: JSON.stringify({ email: email, password: password}),
+                data: JSON.stringify({ email: email, password: password }),
                 type: 'POST',
                 dataType: 'json',
                 success: function (data) {
@@ -43,25 +43,22 @@ module.exports = function (cookieController) {
         self.personStatus(false);
         self.cookieController.deleteCookie(self.cookieController.getCookie());
         $('[data-toggle="dropdown"]').parent().removeClass('open');
-        $("#formLogin").show();
     }
 
     //Send data to server about who downloaded, what app and when.
     self.storepersonData = function (appname){
-        var download = {}
-            download["email"] = self.cookieController.getCookie();
-            download["app"] = appname;
             $.ajax({
                 url: URL_API_SERVER + 'store_download',
-                data: JSON.stringify(download),
+                data: JSON.stringify({ email: self.cookieController.getCookie(), app: appname }),
                 type: 'POST',
                 dataType: 'json',
                 async: false,
                 success: function (data) {
-                    alert("Hi " + self.cookieController.getCookie() + " you have downloaded " + appname);
-                },
-                error: function () {
-                    alert("Didn't store download data");
+                    if (data) {
+                        alert("Hi " + self.cookieController.getCookie() + " you have downloaded " + appname);
+                    } else {
+                        alert("Did not store download data")
+                    }
                 }
             });
     }
