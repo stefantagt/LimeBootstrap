@@ -24,11 +24,15 @@ module.exports = function (cookieController) {
                             break;
                         case 1:
                             $("#password").val("");
+                            $("#password").addClass("form-control-error")
+                            $("#password").removeClass("form-control")
                             alert("wrong password");
                             break;
                         case 2:
                             $("#email").val("");
                             $("#password").val("");
+                            $("#email").addClass("form-control-error")
+                            $("#email").removeClass("form-control")
                             alert("wrong email");
                     }
                 }
@@ -42,7 +46,9 @@ module.exports = function (cookieController) {
     self.personLogout = function (){
         self.personStatus(false);
         self.cookieController.deleteCookie(self.cookieController.getCookie());
+        $("#formLogin").show();  
         $('[data-toggle="dropdown"]').parent().removeClass('open');
+
     }
 
     //Send data to server about who downloaded, what app and when.
