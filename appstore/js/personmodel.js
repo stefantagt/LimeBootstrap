@@ -19,25 +19,31 @@ module.exports = function (cookieController) {
                 type: 'POST',
                 dataType: 'json',
                 success: function (data) {
-                    if(data){
-                    $("#formLogin").hide();
-                    self.cookieController.setCookie(email);
-                    $("#checkbox-login").val(false);
-                    self.personStatus(true);
-                    setTimeout(function() {
-                        $('[data-toggle="dropdown"]').parent().removeClass('open');
-                        $('#menuLogIn').show();
-                    }, 1337*1.49 );
-                }
-                    else{
-                        alert("Wrong email or password");
+                    switch (data) {
+                        case 0:
+                            $("#formLogin").hide();
+                            self.cookieController.setCookie(email);
+                            $("#checkbox-login").val(false);
+                            self.personStatus(true);
+                            setTimeout(function() {
+                                $('[data-toggle="dropdown"]').parent().removeClass('open');
+                                $('#menuLogIn').show();
+                            }, 1337*1.49 );
+                            break;
+                        case 1:
+                            $("#password").val("");
+                            alert("wrong password");
+                            break;
+                        case 2:
+                            $("#email").val("");
+                            $("#password").val("");
+                            alert("wrong email");
                     }
                 }
             });
         } else {
             alert("You have to fill in both email and password.");
         }
-        $("#password").val("");
     }
 
     //Logut person
