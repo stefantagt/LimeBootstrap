@@ -10,19 +10,16 @@ module.exports = function (cookieController) {
         var email = $("#email").val();
         var password = $("#password").val();
         if (email != "" && password != "") {
-            var person = {}
-            person["email"] = email;
-            person["password"] = password;
             $.ajax({
                 url: URL_API_SERVER + 'check_person_access',
-                data: JSON.stringify(person),
+                data: JSON.stringify({ email: email, password: password}),
                 type: 'POST',
                 dataType: 'json',
                 success: function (data) {
                     switch (data) {
                         case 0:
-                            self.cookieController.setCookie(email);
                             self.personStatus(true);
+                            self.cookieController.setCookie(email);
                             $('[data-toggle="dropdown"]').parent().removeClass('open');
                             break;
                         case 1:
