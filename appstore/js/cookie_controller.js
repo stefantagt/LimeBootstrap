@@ -25,7 +25,6 @@ module.exports = function () {
     self.checkCookie = function () {
         var personId = self.getCookie();
         if (personId != "") {
-           $("#formLogin").hide();
             return true;
         } else {
             return false;   
