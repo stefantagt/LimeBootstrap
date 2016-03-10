@@ -21,13 +21,12 @@ module.exports = function (cookieController) {
                 success: function (data) {
                     switch (data) {
                         case 0:
-                            $("#formLogin").hide();
+                            //$("#menuLogin").hide();
                             self.cookieController.setCookie(email);
                             $("#checkbox-login").val(false);
                             self.personStatus(true);
                             setTimeout(function() {
                                 $('[data-toggle="dropdown"]').parent().removeClass('open');
-                                $('#menuLogIn').show();
                             }, 1337*1.49 );
                             break;
                         case 1:
