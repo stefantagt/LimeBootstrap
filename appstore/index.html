@@ -124,6 +124,15 @@
                         <li><a href="/tutorial/" target="_blank" >Tutorial</a></li>
                         <li><a href="/appstore/">Appstore</a></li>
 
+                        <li style = "display: none;" data-bind="visible: mergeMenu">
+                            <div class="input-group menu-appstore-input-group">
+                                <input type="text" class="form-control navbar-appstore-input" placeholder="Search" data-bind="value: searchvalue, valueUpdate: 'afterkeydown'"/>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" id="Button1" type="button" data-bind="icon: 'glyphicon glyphicon-search'"> </button>
+                                </span>
+                            </div>
+                        </li>
+                        
                         <li class="dropdown" id="menuLogin"> 
                             <a class="dropdown-toggle" href="#" data-toggle="dropdown" id="navLogin"><i class="fa fa-user"></i></a>
                                 <div class="dropdown-menu">
@@ -141,15 +150,6 @@
                                         <button type="button" id="btnLogout" class="btn" data-bind="click: personModel.personLogout">Log out</button>
                                     </form>
                                 </div>
-                        </li>
-
-                        <li style = "display: none;" data-bind="visible: mergeMenu">
-                            <div class="input-group menu-appstore-input-group">
-                                <input type="text" class="form-control navbar-appstore-input" placeholder="Search" data-bind="value: searchvalue, valueUpdate: 'afterkeydown'"/>
-                                <span class="input-group-btn">
-                                    <button class="btn btn-default" id="Button1" type="button" data-bind="icon: 'glyphicon glyphicon-search'"> </button>
-                                </span>
-                            </div>
                         </li>
                     </ul>
                 </div>
