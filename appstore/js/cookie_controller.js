@@ -1,8 +1,6 @@
 module.exports = function () {
 	var self = this;
 
-    self.personId = ko.observable();
-
 	//Set cooki with personId and days valid
     self.setCookie = function (personId) {
         var d = new Date();
