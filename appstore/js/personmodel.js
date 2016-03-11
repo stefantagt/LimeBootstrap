@@ -8,11 +8,12 @@ module.exports = function (cookieController) {
 
     //Login function for person
     self.personLogin = function () {
-        self.email = $("#email").val();
+        var email = $("#email").val();
         var password = $("#password").val();
+        self.email(email);
         $.ajax({
             url: URL_API_SERVER + 'check_person_access',
-            data: JSON.stringify({ email: self.email, password: password }),
+            data: JSON.stringify({ email: email, password: password }),
             type: 'POST',
             dataType: 'json',
             success: function (data) {
