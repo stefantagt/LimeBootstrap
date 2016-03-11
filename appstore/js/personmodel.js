@@ -20,7 +20,7 @@ module.exports = function (cookieController) {
                 switch (data) {
                     case 0:
                         self.personStatus(true);
-                        self.cookieController.setCookie(self.email);
+                        self.cookieController.setCookie(email);
                         $('[data-toggle="dropdown"]').parent().removeClass('open');
                         break;
                     case 1:
@@ -47,7 +47,6 @@ module.exports = function (cookieController) {
         self.cookieController.deleteCookie();
         $("#formLogin").show();  
         $("#menuLogin").removeClass('open');
-
     }
 
     //Send data to server about who downloaded, what app and when.
