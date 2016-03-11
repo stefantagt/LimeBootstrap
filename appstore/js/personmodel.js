@@ -10,40 +10,34 @@ module.exports = function (cookieController) {
     self.personLogin = function () {
         self.email = $("#email").val();
         var password = $("#password").val();
-        if (email != "" && password != "") {
-            $.ajax({
-                url: URL_API_SERVER + 'check_person_access',
-                data: JSON.stringify({ email: self.email, password: password }),
-                type: 'POST',
-                dataType: 'json',
-                success: function (data) {
-                    switch (data) {
-                        case 0:
-                            self.personStatus(true);
-                            self.cookieController.setCookie(self.email);
-                            self.cookieController.personId = self.email;
-                            $('[data-toggle="dropdown"]').parent().removeClass('open');
-                            break;
-                        case 1:
-                            $("#password").val("");
-                            $("#password").addClass("form-control-error")
-                            $("#password").removeClass("form-control")
-                            $("#password").attr('placeholder', 'Incorrect password')
-                            //alert("wrong password");
-                            break;
-                        case 2:
-                            $("#email").val("");
-                            $("#password").val("");
-                            $("#email").addClass("form-control-error")
-                            $("#email").removeClass("form-control")
-                            $("#email").attr('placeholder', 'Incorrect email')
-                            //alert("wrong email");
-                    }
+        $.ajax({
+            url: URL_API_SERVER + 'check_person_access',
+            data: JSON.stringify({ email: self.email, password: password }),
+            type: 'POST',
+            dataType: 'json',
+            success: function (data) {
+                switch (data) {
+                    case 0:
+                        self.personStatus(true);
+                        self.cookieController.setCookie(self.email);
+                        $('[data-toggle="dropdown"]').parent().removeClass('open');
+                        break;
+                    case 1:
+                        self.errorLogin("password");
+                        break;
+                    case 2:
+                        self.errorLogin("email");
+                        $("#password").val("");
                 }
-            });
-        } else {
-            alert("You have to fill in both email and password.");
-        }
+            }
+        });
+    }
+
+    self.errorLogin = function (element) {
+        $("#" + element).val("");
+        $("#" + element).addClass("form-control-error");
+        $("#" + element).removeClass("form-control");
+        $("#" + element).attr('placeholder', 'Incorrect' + element);
     }
 
     //Logut person
