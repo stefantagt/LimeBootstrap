@@ -99,8 +99,12 @@ module.exports = function (app, currentpage, personmodel) {
         $("#expanded-" + app.name()).modal('hide');
         $(".downloadApp").show();
         window.scrollTo(0, self.position);
-
     };
+
+    self.openLogin = function(app) {
+        $("#menuLogin").addClass('open');
+        self.closeApp(app);
+    }
     //Code not in use
     /*self.download = function () {
         if (self.license()) {

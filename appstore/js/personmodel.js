@@ -51,7 +51,7 @@ module.exports = function (cookieController) {
         self.personStatus(false);
         self.cookieController.deleteCookie();
         $("#formLogin").show();  
-        $('[data-toggle="dropdown"]').parent().removeClass('open');
+        $("#menuLogin").removeClass('open');
 
     }
 
