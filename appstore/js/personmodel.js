@@ -23,17 +23,17 @@ module.exports = function (cookieController) {
                         $('[data-toggle="dropdown"]').parent().removeClass('open');
                         break;
                     case 1:
-                        self.errorLogin("password");
+                        self.loginError("password");
                         break;
                     case 2:
-                        self.errorLogin("email");
+                        self.loginError("email");
                         $("#password").val("");
                 }
             }
         });
     }
 
-    self.errorLogin = function (element) {
+    self.loginError = function (element) {
         $("#" + element).val("");
         $("#" + element).addClass("form-control-error");
         $("#" + element).removeClass("form-control");
