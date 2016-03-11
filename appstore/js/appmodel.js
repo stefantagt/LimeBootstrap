@@ -91,9 +91,6 @@ module.exports = function (app, currentpage, personmodel) {
         app.expandedApp(true);
         location.hash = app.name()
         $("#expanded-" + app.name()).modal('show');
-        if(personmodel.personStatus()){
-            $(".not-logged-in").hide();
-        }
     };
 
     self.closeApp = function (app) {
