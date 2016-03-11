@@ -146,7 +146,7 @@
                                
                                 <div class="dropdown-menu" data-bind="visible: personModel.personStatus">
                                     <form class="formLogOut" >
-                                        <p>Hello <span data-bind="text: personModel.cookieController.getCookie()"></span></p>
+                                        <p>Hello <span data-bind="text: personModel.email"></span></p>
                                         <button type="button" id="btnLogout" class="btn" data-bind="click: personModel.personLogout">Log out</button>
                                     </form>
                                 </div>
@@ -164,7 +164,7 @@
                 <h1>Appstore</h1>
             </div>
             <div class="login-info" data-bind="visible: personModel.personStatus">
-                <p>Welcome <span data-bind="text: personModel.cookieController.getCookie()"></span></p>
+                <p>Welcome <span data-bind="text: personModel.email"></span></p>
             </div>
         </div>
     </header>
