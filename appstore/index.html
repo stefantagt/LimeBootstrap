@@ -99,7 +99,7 @@
 
                 <div class="navbar-collapse collapse">                    
                     <ul class="nav navbar-nav navbar-right">
-                        <li style = "display: none;" data-bind="visible: mergeMenu">
+                        <li class="hidden" data-bind="visible: mergeMenu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Category <span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu" data-bind="foreach: avaliableStatuses">
                                 <!-- ko if: text != 'All' && text != 'New'-->
@@ -108,13 +108,13 @@
                             </ul>
                         </li>
 
-                        <li style = "display: none;" data-bind="visible: mergeMenu, foreach: avaliableStatuses">
+                        <li class="hidden" data-bind="visible: mergeMenu, foreach: avaliableStatuses">
                             <!-- ko if: text == 'All' -->
                             <a class="" id="A1" data-bind="click: $parent.selectStatusFilter">Show all</a>
                             <!-- /ko -->
                         </li>
 
-                        <li style = "display: none;" data-bind="visible: mergeMenu, foreach: avaliableStatuses">
+                        <li class="hidden" data-bind="visible: mergeMenu, foreach: avaliableStatuses">
                             <!-- ko if: text == 'New' -->
                             <a id="A2" data-bind="click: $parent.selectStatusFilter">New releases</a>
                             <!-- /ko -->
@@ -124,7 +124,7 @@
                         <li><a href="/tutorial/" target="_blank" >Tutorial</a></li>
                         <li><a href="/appstore/">Appstore</a></li>
 
-                        <li style = "display: none;" data-bind="visible: mergeMenu">
+                        <li class="hidden" data-bind="visible: mergeMenu">
                             <div class="input-group menu-appstore-input-group">
                                 <input type="text" class="form-control navbar-appstore-input" placeholder="Search" data-bind="value: searchvalue, valueUpdate: 'afterkeydown'"/>
                                 <span class="input-group-btn">

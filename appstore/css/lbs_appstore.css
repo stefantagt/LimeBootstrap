@@ -240,15 +240,6 @@ code {
 .downloadOk {
     text-align:center;
 }
-.download-with-password {
-	float: right;
-    margin-bottom: 0px;
-    display: none;
-    width: 300px;
-    position: absolute;
-    top: 15px;
-    right: 57px;
-}
 
 .dropdown-menu {
 	padding: 15px;
@@ -287,6 +278,10 @@ code {
 }
 
 .login-info{
-float:right;
-font-size:16px;
+	float: right;
+	font-size: 16px;
+}
+
+.hidden {
+	display: none;
 }
