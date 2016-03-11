@@ -49,7 +49,7 @@ module.exports = function (cookieController) {
     //Logut person
     self.personLogout = function (){
         self.personStatus(false);
-        self.cookieController.deleteCookie(self.cookieController.getCookie());
+        self.cookieController.deleteCookie();
         $("#formLogin").show();  
         $('[data-toggle="dropdown"]').parent().removeClass('open');
 

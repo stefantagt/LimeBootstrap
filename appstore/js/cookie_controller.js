@@ -32,7 +32,8 @@ module.exports = function () {
     }
 
     //Set actvie cookie to time zero and therefore deactivate it
-    self.deleteCookie = function (personId) {
+    self.deleteCookie = function () {
+        var personId = self.getCookie();
         document.cookie = "personId=" + personId + "; expires=Thu, 01-Jan-70 00:00:01 GMT;";
     }
 }
