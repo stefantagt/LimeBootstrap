@@ -19,7 +19,8 @@ module.exports = function (cookieController) {
                     switch (data) {
                         case 0:
                             self.personStatus(true);
-                            self.cookieController.setCookie(email);
+                            //self.cookieController.setCookie(email);
+                            self.cookieController.personId = email;
                             $('[data-toggle="dropdown"]').parent().removeClass('open');
                             break;
                         case 1:

@@ -140,7 +140,7 @@
                                         <input id="email" class="form-control navbar-appstore-input login-input" placeholder="email" /> 
                                         <input id="password" class="form-control navbar-appstore-input login-input" type="password" placeholder="password" />
                                         <button id="btnLogin" class="btn" type="submit">Login</button>
-                                        <a id="register-person-link" href="mailto:info@lundalogik.se">Not yet a user of LIME Pro?</a>
+                                        <a id="register-person-link" href="mailto:info@lundalogik.se" style="font-size: 12px; margin-left:25px;">Not yet a user of LIME Pro?</a>
                                     </form>
                                </div>                               
                                
@@ -162,6 +162,9 @@
         <div class="jumbotron">
             <div class="container">
                 <h1>Appstore</h1>
+            </div>
+            <div class="login-info" data-bind="visible: personModel.personStatus">
+                <p>Welcome <span data-bind="text: personModel.cookieController.getCookie()"></span></p>
             </div>
         </div>
     </header>
