@@ -26,14 +26,16 @@ module.exports = function (cookieController) {
                             $("#password").val("");
                             $("#password").addClass("form-control-error")
                             $("#password").removeClass("form-control")
-                            alert("wrong password");
+                            $("#password").attr('placeholder', 'Incorrect password')
+                            //alert("wrong password");
                             break;
                         case 2:
                             $("#email").val("");
                             $("#password").val("");
                             $("#email").addClass("form-control-error")
                             $("#email").removeClass("form-control")
-                            alert("wrong email");
+                            $("#email").attr('placeholder', 'Incorrect email')
+                            //alert("wrong email");
                     }
                 }
             });
