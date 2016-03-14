@@ -231,7 +231,7 @@ var viewModel = function (personModel) {
     }
     $(window).scroll(function () {
         var scrollTop = $(window).scrollTop();
-        if (scrollTop >= 200) {
+        if (scrollTop >= 141) {
             self.mergeMenu(true);
         }
         else {

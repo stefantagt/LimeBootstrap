@@ -11,8 +11,9 @@ font-weight: 100;
 .jumbotron {
 	background-color: #A0CE4E;
 	border-color: transparent;
-color:#FFF;
-
+	color:#FFF;
+	margin-bottom: 0px;
+	padding-bottom: 20px;
 }
 
 .navbar-default {
@@ -37,7 +38,6 @@ color:#FFF;
     margin-left:10px;
 }
 .app {
-	
 	background-color: #FFF;
 	height: 350px;
 	margin: 10px;
@@ -139,9 +139,6 @@ code {
 	line-height: 40px;
 	padding-left: 10px;
 }
-.navbar-appstore {
-	padding: 0;
-}
 
 .navbar-appstore-input {
 	width: 250px;	
@@ -161,15 +158,12 @@ code {
 }
 .navbar-appstore {
 	background-color: #fff; 
-	padding: 5px 15px 5px 35px;
+	padding: 0px;
 	margin-right: 10px;
 	margin-left: 10px;	
 }
 .nav-tabs {
 	border: none;
-}
-.jumbotron {
-	margin-bottom: 0px;
 }
 .nav-tabs>li>a{
 	border-radius: 0;
@@ -279,5 +273,6 @@ code {
 
 .login-info{
 	float: right;
+	margin-right: 10px;
 	font-size: 16px;
 }
