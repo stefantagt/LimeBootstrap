@@ -172,8 +172,10 @@
 
         <div class="jumbotron">
             <div class="container">
-                <h1>Appstore</h1>
-                <div class="login-info" data-bind="visible: personModel.personStatus">
+                <div id="header-wrapper">
+                    <h1>Appstore</h1>
+                </div>
+                <div id="login-info" data-bind="visible: personModel.personStatus">
                     <p>Welcome <span data-bind="text: personModel.email"></span></p>
                 </div>
             </div>
