@@ -276,28 +276,10 @@ code {
 	float: left;
 }
 
-#login-info {
-	float: right;
-	margin-top: 60px;
-	margin-right: 10px;
-	font-size: 16px;
-}
-
-#login-info p {
-	margin-bottom: 0px;
-}
-
 @media screen and (max-width: 767px){
 	#header-wrapper {
 		width: 100%;
 		margin-top: 10px;
-	}
-
-	#login-info {
-		float: left;
-		margin-top: 10px;
-		margin-bottom: 10px;
-		font-size: 16px;
 	}
 
 	.jumbotron {
