@@ -145,22 +145,30 @@
                         <!-- /ko -->
 
                         <li class="dropdown" id="menuLogin"> 
-                            <a class="dropdown-toggle" href="#" data-toggle="dropdown" id="navLogin"><i class="fa fa-user"></i></a>
-                                <div class="dropdown-menu">
-                                    <form class="form" id="formLogin" data-bind="submit: personModel.personLogin, ifnot:personModel.personStatus"> 
-                                        <input id="email" class="form-control navbar-appstore-input login-input" placeholder="email" /> 
-                                        <input id="password" class="form-control navbar-appstore-input login-input" type="password" placeholder="password" />
-                                        <button id="btnLogin" class="btn" type="submit">Login</button>
-                                        <a id="register-person-link" href="mailto:info@lundalogik.se" style="font-size: 12px; margin-left:25px;">Not yet a user of LIME Pro?</a>
-                                    </form>
-                               </div>                               
+                            <a class="dropdown-toggle" href="#" data-toggle="dropdown" id="navLogin">
+                                <i class="fa fa-user"></i>
+                                <!-- ko ifnot: personModel.personStatus -->
+                                    Login
+                                <!-- /ko -->
+                                <!-- ko if: personModel.personStatus -->
+                                    Logout
+                                <!-- /ko -->
+                            </a>
+                            <div class="dropdown-menu">
+                                <form class="form" id="formLogin" data-bind="submit: personModel.personLogin, ifnot:personModel.personStatus"> 
+                                    <input id="email" class="form-control navbar-appstore-input login-input" placeholder="email" /> 
+                                    <input id="password" class="form-control navbar-appstore-input login-input" type="password" placeholder="password" />
+                                    <button id="btnLogin" class="btn" type="submit">Login</button>
+                                    <a id="register-person-link" href="mailto:info@lundalogik.se" style="font-size: 12px; margin-left:25px;">Not yet a user of LIME Pro?</a>
+                                </form>
+                           </div>                               
                                
-                                <div class="dropdown-menu" data-bind="visible: personModel.personStatus">
-                                    <form class="formLogOut" >
-                                        <p>Hello <span data-bind="text: personModel.email"></span></p>
-                                        <button type="button" id="btnLogout" class="btn" data-bind="click: personModel.personLogout">Log out</button>
-                                    </form>
-                                </div>
+                            <div class="dropdown-menu" data-bind="visible: personModel.personStatus">
+                                <form class="formLogOut" >
+                                    <p>Hello <span data-bind="text: personModel.email"></span></p>
+                                    <button type="button" id="btnLogout" class="btn" data-bind="click: personModel.personLogout">Log out</button>
+                                </form>
+                            </div>
                         </li>
                     </ul>
                 </div>
