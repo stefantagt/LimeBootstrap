@@ -1,13 +1,13 @@
 appFactory = require("./appmodel.js");
 personModel = require("./personmodel.js");
-cookieController = require("./cookie_controller.js");
+cookieModel = require("./cookiemodel.js");
 var URL_API_SERVER = "http://localhost:5000/";
 
 var lbsappstore = {
     init: function () {
         $.getJSON(URL_API_SERVER + 'apps?page=1', function (data) {
-            var cc = new cookieController();
-            var pm = new personModel(cc);
+            var cm = new cookieModel();
+            var pm = new personModel(cm);
             var vm = new viewModel(pm);
             vm.populateFromRawData(data);
             vm.pages = ko.observableArray();

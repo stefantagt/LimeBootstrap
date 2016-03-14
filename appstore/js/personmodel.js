@@ -1,10 +1,12 @@
-module.exports = function (cookieController) {
+module.exports = function (cookieModel) {
     var self = this;
-    self.cookieController = cookieController;
-    //Status of person. "False = not logged in person" - "True = logged in person"
-    self.personStatus = ko.observable(self.cookieController.checkCookie());
     var URL_API_SERVER = "http://localhost:5000/";
-    self.email = ko.observable(self.cookieController.getCookie());
+    self.cookieModel = cookieModel;
+    //Status of person. "False = not logged in person" - "True = logged in person"
+    self.personStatus = ko.observable(self.cookieModel.checkCookie());
+    if (self.personStatus) {
+        self.email = ko.observable(self.cookieModel.getCookie());
+    }
 
     //Login function for person
     self.personLogin = function () {
@@ -20,7 +22,7 @@ module.exports = function (cookieController) {
                 switch (data) {
                     case 0:
                         self.personStatus(true);
-                        self.cookieController.setCookie(email);
+                        self.cookieModel.setCookie(email);
                         $('[data-toggle="dropdown"]').parent().removeClass('open');
                         break;
                     case 1:
@@ -44,7 +46,7 @@ module.exports = function (cookieController) {
     //Logut person
     self.personLogout = function (){
         self.personStatus(false);
-        self.cookieController.deleteCookie();
+        self.cookieModel.deleteCookie();
         $("#formLogin").show();  
         $("#menuLogin").removeClass('open');
     }
@@ -53,13 +55,13 @@ module.exports = function (cookieController) {
     self.storepersonData = function (appname){
             $.ajax({
                 url: URL_API_SERVER + 'store_download',
-                data: JSON.stringify({ email: self.cookieController.getCookie(), app: appname }),
+                data: JSON.stringify({ email: self.cookieModel.getCookie(), app: appname }),
                 type: 'POST',
                 dataType: 'json',
                 async: false,
                 success: function (data) {
                     if (data) {
-                        alert("Hi " + self.cookieController.getCookie() + " you have downloaded " + appname);
+                        alert("Hi " + self.cookieModel.getCookie() + " you have downloaded " + appname);
                     } else {
                         alert("Did not store download data")
                     }
