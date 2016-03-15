@@ -1,28 +1,42 @@
 module.exports = function (cookieModel) {
     var self = this;
     var URL_API_SERVER = "http://localhost:5000/";
+
+    //Cookie class
     self.cookieModel = cookieModel;
+
     //Status of person. "False = not logged in person" - "True = logged in person"
     self.personStatus = ko.observable(self.cookieModel.checkCookie());
+
+    //If personStatus true, get email from cookie
     if (self.personStatus) {
         self.email = ko.observable(self.cookieModel.getCookie());
+    } else {
+        self.email = ko.observable("");
     }
+
+    //enable login button if email is filled in
+    self.checkInput = ko.computed(function() {
+        if (self.email() != "") {
+            return true;
+        } else {
+            return false;
+        }
+    }, self);
 
     //Login function for person
     self.personLogin = function () {
-        var email = $("#email").val();
         var password = $("#password").val();
-        self.email(email);
         $.ajax({
             url: URL_API_SERVER + 'check_person_access',
-            data: JSON.stringify({ email: email, password: password }),
+            data: JSON.stringify({ email: self.email(), password: password }),
             type: 'POST',
             dataType: 'json',
             success: function (data) {
                 switch (data) {
                     case 0:
                         self.personStatus(true);
-                        self.cookieModel.setCookie(email);
+                        self.cookieModel.setCookie(self.email());
                         $('[data-toggle="dropdown"]').parent().removeClass('open');
                         break;
                     case 1:

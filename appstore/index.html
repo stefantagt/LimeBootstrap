@@ -158,9 +158,9 @@
                             </a>
                             <div class="dropdown-menu">
                                 <form class="form" id="formLogin" data-bind="submit: personModel.personLogin, ifnot:personModel.personStatus"> 
-                                    <input id="email" class="form-control navbar-appstore-input login-input" placeholder="email" /> 
+                                    <input id="email" class="form-control navbar-appstore-input login-input" placeholder="email" data-bind="value: personModel.email, valueUpdate: 'keyup'"/> 
                                     <input id="password" class="form-control navbar-appstore-input login-input" type="password" placeholder="password" />
-                                    <button id="btnLogin" class="btn" type="submit">Login</button>
+                                    <button id="btnLogin" class="btn" type="submit" data-bind="enable: personModel.checkInput()">Login</button>
                                     <a id="register-person-link" href="mailto:info@lundalogik.se" style="font-size: 12px; margin-left:25px;">Not yet a user of LIME Pro?</a>
                                 </form>
                            </div>                               
