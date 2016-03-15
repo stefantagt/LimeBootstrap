@@ -247,6 +247,21 @@ code {
 #logout-form i {
 	color: #A0CE4E;
 }
+.successful-download{
+	background-color: #A0CE4E;
+	margin-top: -10px;
+	margin-bottom: 10px;
+	padding: 0px;
+	font-size: 15px;
+	color:#fff;	
+	height: 40px;
+	line-height: 40px;
+	padding-left: 10px;
+	display:none;
+}
+.downloadApp .btn-success{
+	background-color:#A0CE4E;
+}
 
 #register-user-link {
 	display: inline;
