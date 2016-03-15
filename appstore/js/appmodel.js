@@ -98,6 +98,7 @@ module.exports = function (app, currentpage, personmodel) {
         location.hash = '';
         $("#expanded-" + app.name()).modal('hide');
         $(".downloadApp").show();
+        $(".successful-download").hide();
         window.scrollTo(0, self.position);
     };
 

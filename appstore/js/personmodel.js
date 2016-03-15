@@ -62,7 +62,7 @@ module.exports = function (cookieModel) {
                 async: false,
                 success: function (data) {
                     if (data) {
-                        alert("Hi " + self.cookieModel.getCookie() + " you have downloaded " + appname);
+                        $(".successful-download").show();
                     } else {
                         alert("Did not store download data")
                     }
