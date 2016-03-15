@@ -37,10 +37,11 @@ module.exports = function (cookieModel) {
     }
 
     self.loginError = function (element) {
+        $("#password, #email").removeClass("form-control-error").addClass("form-control");
         $("#" + element).val("");
         $("#" + element).addClass("form-control-error");
         $("#" + element).removeClass("form-control");
-        $("#" + element).attr('placeholder', 'Incorrect' + element);
+        $("#" + element).attr('placeholder', 'Incorrect ' + element);
     }
 
     //Logut person
