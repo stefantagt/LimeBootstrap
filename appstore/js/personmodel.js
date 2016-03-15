@@ -50,6 +50,7 @@ module.exports = function (cookieModel) {
         });
     }
 
+    //Login error function to change css classes
     self.loginError = function (element) {
         $("#password, #email").removeClass("form-control-error").addClass("form-control");
         $("#" + element).val("");
@@ -77,8 +78,6 @@ module.exports = function (cookieModel) {
                 success: function (data) {
                     if (data) {
                         $(".successful-download").show();
-                    } else {
-                        alert("Did not store download data")
                     }
                 }
             });
