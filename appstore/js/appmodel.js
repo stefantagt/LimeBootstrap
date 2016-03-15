@@ -104,6 +104,7 @@ module.exports = function (app, currentpage, personmodel) {
 
     self.openLogin = function(app) {
         $("#menuLogin").addClass('open');
+        $('#email').focus()
         self.closeApp(app);
     }
     //Code not in use
