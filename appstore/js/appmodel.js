@@ -87,10 +87,16 @@ module.exports = function (app, currentpage, personmodel) {
     };
 
     self.expandApp = function (app) {
-        self.scrollPosition();
-        app.expandedApp(true);
-        location.hash = app.name()
-        $("#expanded-" + app.name()).modal('show');
+        if (!mobileUser()){
+            self.scrollPosition();
+            app.expandedApp(true);
+            location.hash = app.name()
+            $("#expanded-" + app.name()).modal('show');
+        }
+        else {
+            alert("To enjoy the full potential of our Lime leafs you have to switch to a computer!")
+        }
+
     };
 
     self.closeApp = function (app) {
@@ -101,11 +107,27 @@ module.exports = function (app, currentpage, personmodel) {
         $(".successful-download").hide();
         window.scrollTo(0, self.position);
     };
-
+    //open login dropdown
     self.openLogin = function(app) {
         $("#menuLogin").addClass('open');
         $('#email').focus()
         self.closeApp(app);
+    }
+    //check if mobile-user
+    window.mobileUser = function() {
+        if( navigator.userAgent.match(/Android/i)
+            || navigator.userAgent.match(/webOS/i)
+            || navigator.userAgent.match(/iPhone/i)
+            || navigator.userAgent.match(/iPad/i)
+            || navigator.userAgent.match(/iPod/i)
+            || navigator.userAgent.match(/BlackBerry/i)
+            || navigator.userAgent.match(/Windows Phone/i)
+        ){
+        return true;
+    }
+    else {
+        return false;
+    }
     }
     //Code not in use
     /*self.download = function () {
