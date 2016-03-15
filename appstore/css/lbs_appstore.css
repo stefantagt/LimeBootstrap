@@ -119,6 +119,11 @@ code {
     margin-left: auto;
     margin-right: auto;
 }
+#header-wrapper img {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
 .license-app {
 	background-color: #FFD600;
 	margin-top: -10px;
