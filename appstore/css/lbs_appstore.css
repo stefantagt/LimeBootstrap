@@ -310,3 +310,12 @@ code {
 		padding: 0px;
 	}
 }
+
+.hide {
+	display:none;
+}
+
+#register-person-link {
+	font-size: 12px; 
+	margin-left:25px;
+}

@@ -106,8 +106,8 @@
                 <div class="navbar-collapse collapse">                    
                     <ul class="nav navbar-nav navbar-right">
 
-                        <!-- ko if: mergeMenu -->
-                        <li>
+                        
+                        <li class="hide" data-bind="visible: mergeMenu" >
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Category <span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu" data-bind="foreach: avaliableStatuses">
                                 <!-- ko if: text != 'All' && text != 'New'-->
@@ -115,7 +115,6 @@
                                 <!-- /ko -->
                             </ul>
                         </li>
-                        <!-- /ko -->
 
                         <!-- ko if: mergeMenu -->
                         <li data-bind="foreach: avaliableStatuses">
@@ -135,8 +134,7 @@
                         <li><a href="/tutorial/" target="_blank" >Tutorial</a></li>
                         <li><a href="/appstore/">Appstore</a></li>
 
-                        <!-- ko if: mergeMenu -->
-                        <li>
+                        <li class="hide" data-bind="visible: mergeMenu">
                             <div class="input-group menu-appstore-input-group">
                                 <input type="text" class="form-control navbar-appstore-input" placeholder="Search" data-bind="value: searchvalue, valueUpdate: 'afterkeydown'"/>
                                 <span class="input-group-btn">
@@ -144,7 +142,6 @@
                                 </span>
                             </div>
                         </li>
-                        <!-- /ko -->
 
                         <li class="dropdown" id="menuLogin"> 
                             <a class="dropdown-toggle" href="#" data-toggle="dropdown" id="navLogin">
@@ -161,7 +158,7 @@
                                     <input id="email" class="form-control navbar-appstore-input login-input" placeholder="email" data-bind="value: personModel.email, valueUpdate: 'keyup'"/> 
                                     <input id="password" class="form-control navbar-appstore-input login-input" type="password" placeholder="password" />
                                     <button id="btnLogin" class="btn" type="submit" data-bind="enable: personModel.checkInput()">Login</button>
-                                    <a id="register-person-link" href="mailto:info@lundalogik.se" style="font-size: 12px; margin-left:25px;">Not yet a user of LIME Pro?</a>
+                                    <a id="register-person-link" href="https://www.lundalogik.com/about-us/" target="_blank">Not yet a user of LIME Pro?</a>
                                 </form>
                            </div>                               
                                
