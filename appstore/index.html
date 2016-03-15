@@ -164,9 +164,8 @@
                            </div>                               
                                
                             <div class="dropdown-menu" data-bind="visible: personModel.personStatus">
-                                <form id="logout-form" >
-                                    <h4>You are logged in as:</h4>
-                                    <p><span data-bind="text: personModel.email"></span></p>
+                                <form id="logout-form">
+                                    <span class="form-control"><i class="fa fa-user"></i> <span data-bind="text: personModel.email"></span></span>
                                     <button type="button" id="btnLogout" class="btn" data-bind="click: personModel.personLogout">Log out</button>
                                 </form>
                             </div>

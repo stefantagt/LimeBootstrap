@@ -244,17 +244,18 @@ code {
 	margin-bottom: 10px
 }
 
-#logout-form p{
-    padding: 6px 12px;
-    border: 1px solid;
-    border-radius: 4px;
-    background-color: rgb(250, 255, 189);
+#logout-form i {
+	color: #A0CE4E;
 }
 
 #register-user-link {
 	display: inline;
 	padding-right: 5px;
 	float: right;
+}
+
+.form-control {
+	margin-bottom: 10px;
 }
 
 .form-control-error {
