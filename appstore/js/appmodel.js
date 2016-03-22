@@ -7,6 +7,7 @@ module.exports = function (app, currentpage, personmodel) {
     self.images = [];
     self.currentpage = currentpage;
     self.um = personmodel;
+    var URL_API_SERVER = "http://localhost:5000/";
     /**
 	Sets default picture if app images is missing.
 	*/
@@ -152,13 +153,14 @@ module.exports = function (app, currentpage, personmodel) {
         var license_key = $("#license_key").val();
         $.ajax({
             url: URL_API_SERVER + 'check_license',
-            data: JSON.stringify({ app_name: self.appName, license_key: license_key }),
+            data: JSON.stringify({ app_name: self.name(), license_key: license_key }),
             type: 'POST',
             dataType: 'json',
             success: function (data) {
                 switch (data) {
                     case 0:
-                        self.downloadApp()
+                        $("#license_key").removeClass("form-control-error").addClass("form-control");
+                        self.downloadApp();
                         break;
                     case 1:
                         self.licenseError("license_key");
