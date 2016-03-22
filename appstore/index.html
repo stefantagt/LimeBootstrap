@@ -44,14 +44,28 @@
                                 <button type="button" class="close" data-bind="click: app.closeApp" aria-hidden="true">&times;</button>
                                 <h4 class="modal-title">
                                     <span data-bind="text: app.appName()"></span>
-                                    <span class="downloadApp" data-bind="if: $root.personModel.personStatus">
+                                    <span class="downloadApp" data-bind="if: $root.personModel.personStatus, if: !app.license()">
                                         <button type="button" class="btn btn-success pull-right download" data-bind="click: app.downloadApp">
-                                            <span data-bind="text: (app.license()? 'Paid': 'Download')"></span>
+                                            <span data-bind="text: 'Download'"></span>
                                         </button>
                                         <button type="button" class="btn btn-default pull-right download" data-bind="click: app.githubAddress">
                                             <span class="glyphicon glyphicon-cog"></span>
                                             Report problem or look at source
                                         </button>
+                                    </span>
+                                    <span class="downloadApp" data-bind="if: app.license() && $root.personModel.personStatus">
+                                     <form class= "form-inline" role ="form">
+                                      <div class ="form-group">
+                                       <input type="password" class="form-control" id="license_key">
+                                       </div>
+                                        <button type="button" class="btn btn-success pull-right download" data-bind="click: app.licenseCheck">
+                                            <span data-bind="text: 'Paid'"></span>
+                                        </button>
+                                        <button type="button" class="btn btn-default pull-right download" data-bind="click: app.githubAddress">
+                                            <span class="glyphicon glyphicon-cog"></span>
+                                            Report problem or look at source
+                                        </button>
+                                        </form>
                                     </span>
                                 </h4>
                             </div>
