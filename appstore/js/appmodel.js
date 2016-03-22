@@ -148,6 +148,34 @@ module.exports = function (app, currentpage, personmodel) {
                 personmodel.storepersonData(self.name());
     }
 
+    self.licenseCheck = function () {
+        var license_key = $("#license_key").val();
+        $.ajax({
+            url: URL_API_SERVER + 'check_license',
+            data: JSON.stringify({ app_name: self.appName, license_key: license_key }),
+            type: 'POST',
+            dataType: 'json',
+            success: function (data) {
+                switch (data) {
+                    case 0:
+                        self.downloadApp()
+                        break;
+                    case 1:
+                        self.licenseError("license_key");
+                        break;
+                }
+            }
+        });
+    }
+
+    self.licenseError = function (element) {
+        $("#license_key").removeClass("form-control-error").addClass("form-control");
+        $("#" + element).val("");
+        $("#" + element).addClass("form-control-error");
+        $("#" + element).removeClass("form-control");
+        $("#" + element).attr('placeholder', 'Incorrect ' + element);
+    }
+
     //Code not in use
     /*self.installappwithlip = function () {
         if (self.name()) {
