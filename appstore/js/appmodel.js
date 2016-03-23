@@ -93,6 +93,7 @@ module.exports = function (app, currentpage, personmodel) {
             app.expandedApp(true);
             location.hash = app.name()
             $("#expanded-" + app.name()).modal('show');
+            $(".license-app").show();
         }
         else {
             alert("To enjoy the full potential of our Lime leafs you have to switch to a computer!")
@@ -144,7 +145,6 @@ module.exports = function (app, currentpage, personmodel) {
     };
     */
     self.downloadApp = function () {
-                console.log("downloaing app");
                 location.href = 'http://api.lime-bootstrap.com/apps/' + self.name() + '/download'
                 personmodel.storepersonData(self.name());
     }

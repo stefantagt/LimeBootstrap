@@ -56,14 +56,14 @@
                                     </span>
                                     <!-- /ko -->
                                     <!-- ko if: app.license() && $root.personModel.personStatus -->
-                                    <span class="downloadApp">
+                                    <span class="downloadApp" style="float:right;">
                                      <form class= "form-inline" role ="form">
-                                      <div class ="form-group">
-                                       <input type="password" class="form-control" placeholder="license key" id="license_key">
-                                       </div>
-                                        <button type="button" class="btn btn-success pull-right download" data-bind="click: app.licenseCheck">
-                                            <span data-bind="text: 'Paid'"></span>
+                                       
+                                        <button type="submit" class="btn btn-success pull-right download" data-bind="click: app.licenseCheck">
+                                            <span>Download</span>
+                                            
                                         </button>
+                                        <input type="password" class="form-control" placeholder="license key" id="license_key" style="width:150px; float:right; margin-right:5px;">
                                         <button type="button" class="btn btn-default pull-right download" data-bind="click: app.githubAddress">
                                             <span class="glyphicon glyphicon-cog"></span>
                                             Report problem or look at source
@@ -76,7 +76,7 @@
 
                             <div class="modal-body">
                             <!-- ko if: app.license() && $root.personModel.personStatus -->
-                                <div class="license-app" data-bind="icon:'glyphicon-flag', visible: app.license">You need to pay for this app, <a href="http://www.lundalogik.com/about-us/contact-us/find-us/">please contact us!</a></div>
+                                <div class="license-app" id="license-banner" data-bind="icon:'glyphicon-flag'">You need to pay for this app, <a href="http://www.lundalogik.com/about-us/contact-us/find-us/">please contact us!</a></div>
                                 <!-- /ko -->
                                 <!-- ko ifnot: $root.personModel.personStatus -->
                                 <div class="not-logged-in" data-bind="icon:'glyphicon-flag'">You need to be logged in order to download this app. <a href="#" data-bind="click: app.openLogin">Please login here</a></div>

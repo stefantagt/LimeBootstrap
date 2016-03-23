@@ -78,6 +78,7 @@ module.exports = function (cookieModel) {
                 success: function (data) {
                     if (data) {
                         $(".successful-download").show();
+                        $(".license-app").hide();
                     }
                 }
             });
