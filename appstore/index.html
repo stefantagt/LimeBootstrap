@@ -76,7 +76,7 @@
 
                             <div class="modal-body">
                             <!-- ko if: app.license() && $root.personModel.personStatus -->
-                                <div class="license-app" id="license-banner" data-bind="icon:'glyphicon-flag'">You need to pay for this app, <a href="http://www.lundalogik.com/about-us/contact-us/find-us/">please contact us!</a></div>
+                                <div class="license-app" id="license-banner" data-bind="icon:'glyphicon-flag'">You need to pay for this app, <a target="_blank" href="http://www.lundalogik.com/about-us/contact-us/find-us/">please contact us!</a></div>
                                 <!-- /ko -->
                                 <!-- ko ifnot: $root.personModel.personStatus -->
                                 <div class="not-logged-in" data-bind="icon:'glyphicon-flag'">You need to be logged in order to download this app. <a href="#" data-bind="click: app.openLogin">Please login here</a></div>

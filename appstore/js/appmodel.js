@@ -160,6 +160,7 @@ module.exports = function (app, currentpage, personmodel) {
                 switch (data) {
                     case 0:
                         $("#license_key").removeClass("form-control-error").addClass("form-control");
+                        $("#license_key").attr('placeholder', 'license key');
                         self.downloadApp();
                         break;
                     case 1:
