@@ -44,7 +44,8 @@
                                 <button type="button" class="close" data-bind="click: app.closeApp" aria-hidden="true">&times;</button>
                                 <h4 class="modal-title">
                                     <span data-bind="text: app.appName()"></span>
-                                    <span class="downloadApp" data-bind="if: $root.personModel.personStatus, if: !app.license()">
+                                    <!-- ko if: !app.license() && $root.personModel.personStatus -->
+                                    <span class="downloadApp">
                                         <button type="button" class="btn btn-success pull-right download" data-bind="click: app.downloadApp">
                                             <span data-bind="text: 'Download'"></span>
                                         </button>
@@ -53,10 +54,12 @@
                                             Report problem or look at source
                                         </button>
                                     </span>
-                                    <span class="downloadApp" data-bind="if: app.license() && $root.personModel.personStatus">
+                                    <!-- /ko -->
+                                    <!-- ko if: app.license() && $root.personModel.personStatus -->
+                                    <span class="downloadApp">
                                      <form class= "form-inline" role ="form">
                                       <div class ="form-group">
-                                       <input type="password" class="form-control" id="license_key">
+                                       <input type="password" class="form-control" placeholder="license key" id="license_key">
                                        </div>
                                         <button type="button" class="btn btn-success pull-right download" data-bind="click: app.licenseCheck">
                                             <span data-bind="text: 'Paid'"></span>
@@ -67,12 +70,14 @@
                                         </button>
                                         </form>
                                     </span>
+                                    <!-- /ko -->
                                 </h4>
                             </div>
 
                             <div class="modal-body">
+                            <!-- ko if: app.license() && $root.personModel.personStatus -->
                                 <div class="license-app" data-bind="icon:'glyphicon-flag', visible: app.license">You need to pay for this app, <a href="http://www.lundalogik.com/about-us/contact-us/find-us/">please contact us!</a></div>
-
+                                <!-- /ko -->
                                 <!-- ko ifnot: $root.personModel.personStatus -->
                                 <div class="not-logged-in" data-bind="icon:'glyphicon-flag'">You need to be logged in order to download this app. <a href="#" data-bind="click: app.openLogin">Please login here</a></div>
                                 <!-- /ko -->
